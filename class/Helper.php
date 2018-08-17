@@ -416,7 +416,6 @@ class Helper {
                             <h4 class="sal"><strong>Dear ' . $BOOKING->name . '</strong></h4>
                             <div class="desc">
                                 <p>Thank you for making an online booking with Coral Sands Hotel. Your booking reference is :  #1001' . $bookingid . ' Your booking is subject to the terms & conditions listed on the website. This is your booking confirmation and is not valid as an accommodation voucher.</p>
-                                <p>A separate accommodation voucher has been issued and e-mailed to you with respect to this reservation. Please produce a copy on arrival.</p>
                                 <p>The holder of the Credit Card used to make the booking should be present at the time of check-in</p>
                             </div>
                             
@@ -559,11 +558,7 @@ class Helper {
                                     <td>: US $ ' . number_format($totEBPrice * $nights, 2) . '</td>
                                 </tr>';
         }
-        $html .= '<tr> 
-                                    <td>Charged Amount</td>
-                                    <td>: US $ ' . number_format($totPrice, 2) . '</td>
-                                </tr>
-                                <tr>
+        $html .= '<tr>
                                     <td></td>
                                     <td></td>
                                 </tr>
@@ -930,11 +925,7 @@ class Helper {
                                     <td>: US $ ' . number_format($totEBPrice * $nights, 2) . '</td>
                                 </tr>';
         }
-        $html .= '<tr> 
-                                    <td>Charged Amount</td>
-                                    <td>: US $ ' . number_format($totPrice, 2) . '</td>
-                                </tr>
-                                <tr>
+        $html .= '<tr>
                                     <td></td>
                                     <td></td>
                                 </tr>
