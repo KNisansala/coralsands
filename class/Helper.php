@@ -415,8 +415,8 @@ class Helper {
                             <h2 class="topic">Booking Confirmation | Coral Sands Hotel - Hikkaduwa | #1001' . $bookingid . '</h2>
                             <h4 class="sal"><strong>Dear ' . $BOOKING->name . '</strong></h4>
                             <div class="desc">
-                                <p>Thank you for making an online booking with Coral Sands Hotel. Your booking reference is :  #1001' . $bookingid . ' Your booking is subject to the terms & conditions listed on the website. This is your booking confirmation and is not valid as an accommodation voucher.</p>
-                                <p>The holder of the Credit Card used to make the booking should be present at the time of check-in</p>
+                                <p>Thank you for making an online booking with Coral Sands Hotel. Your booking reference is :  #1001' . $bookingid . ' Your booking is subject to the terms & conditions listed on the website. </p>
+                                <p>The holder of the Credit Card used to make the booking should be present at the time of check-in.</p>
                             </div>
                             
                             <table class="booking-details">
