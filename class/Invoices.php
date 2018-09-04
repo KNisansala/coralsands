@@ -365,7 +365,7 @@ class Invoices {
 
             if ($status === 'error') {
                 $repay = '<div>
-                                <h3>Your transaction was NOT successful. Please  follow the payment proceed again. </h3>
+                                <h3>Your transaction was NOT successful. Please  follow the payment process again. </h3>
                             </div>
                             <div style="text-align: center; margin: 35px 0px;">
                                 <a href="http://' . $site . '/invoice-pay.php?id=' . $id . '" style="padding: 15px; font-weight: bold; text-decoration: none; background-color: #ff4200; color: #dfdfdf; border-radius: 3px;">Complete Payment</a>
@@ -486,7 +486,7 @@ class Invoices {
 
             if ($status === 'error') {
                 $repay = '<div>
-                                <h3>Your transaction was NOT successful. Please  follow the payment proceed again. </h3>
+                                <h3>Your transaction was NOT successful. Please  follow the payment process again. </h3>
                             </div>
                             <div style="text-align: center; margin: 35px 0px;">
                                 <a href="http://' . $site . '/invoice-pay.php?id=' . $id . '" style="padding: 15px; font-weight: bold; text-decoration: none; background-color: #ff4200; color: #dfdfdf; border-radius: 3px;">Complete Payment</a>
