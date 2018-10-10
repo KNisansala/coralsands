@@ -60,7 +60,7 @@ if (
     exit();
 } else {
     $response['status'] = 'correct';
-    $response['msg'] = "Could nod be sent your message";
+    $response['msg'] = "Could not be sent your message";
     echo json_encode($response);
     exit();
 } 
