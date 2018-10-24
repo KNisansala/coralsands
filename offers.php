@@ -29,6 +29,7 @@ $offers = $offer->getAll();
         <link rel="stylesheet" href="css/sliders/owl.carousel/owl.transitions.css" type="text/css" media="all">
         <link rel="stylesheet" href="css/sliders/owl.carousel/owl.theme.green.css" type="text/css" media="all">
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link href="css/styles.css" rel="stylesheet" type="text/css"/>
         <link rel="shortcut icon" type="image/x-icon" href="images/index.ico">
 
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -64,7 +65,7 @@ $offers = $offer->getAll();
                         </div>
                     </div>
 
-                    <section class="hg_section sec1">
+<!--                    <section class="hg_section sec1">
                         <div class="container offer2 wi-pb10">
 
 
@@ -92,6 +93,71 @@ $offers = $offer->getAll();
                             ?>
 
 
+                        </div>
+                    </section>-->
+                    
+                    <section class="hg_section sec1">
+                        <div class="container offer2 wi-pb10">
+                            <div class="container con-margin" style="background-image:url(images/offers/image1.jpg); background-repeat:repeat;">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 offering-color1">
+                                    <div class="col-md-6">
+                                        <div class="offer-l"> 
+                                            <span class="ol-1"></span> 
+                                            <span class="ol-2">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i></span> 
+                                            <span class="ol-4">Discount of US$ 10 per night for all direct bookings through our web site</span> 
+                                            <span class="ol-3"></span> 
+<!--                                            <span class="ol-5">$99/-</span>-->
+                                            <ul>
+                                                <li>
+                                                    <a href="#!" class="waves-effect waves-light btn-large offer-btn">
+                                                        <img src="images/offers/dis1.png" alt="">
+                                                    </a><span>Free WiFi</span>
+                                                </li>
+                                                <li>
+                                                    <a href="#!" class="waves-effect waves-light btn-large offer-btn">
+                                                        <img src="images/offers/dis2.png" alt=""> </a><span>Breakfast</span>
+                                                </li>
+                                                <li>
+                                                    <a href="#!" class="waves-effect waves-light btn-large offer-btn">
+                                                        <img src="images/offers/dis3.png" alt=""> </a><span>Pool</span>
+                                                </li>
+                                                <li>
+                                                    <a href="#!" class="waves-effect waves-light btn-large offer-btn">
+                                                        <img src="images/offers/dis4.png" alt=""> </a><span>Television</span>
+                                                </li>
+                                                <li>
+                                                    <a href="#!" class="waves-effect waves-light btn-large offer-btn">
+                                                        <img src="images/offers/dis5.png" alt=""> </a><span>GYM</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 hidden-xs hidden-sm">
+                                        <div class="offer-r">
+                                            <div class="or-1">
+                                                <a href="booking.php"><span class="or-11">Book</span></a> 
+                                                <a href="booking.php"><span class="or-12">Now</span></a>
+                                            </div>
+                                            <div class="or-2"> 
+                                                <span class="or-21">Get</span> 
+                                                <span class="or-22">10%</span> 
+                                                <span class="or-23">Off</span> 
+                                                <span class="or-24"></span> 
+                                                <span class="or-25"></span> 
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
                         </div>
                     </section>
 
