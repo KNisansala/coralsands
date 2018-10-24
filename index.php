@@ -37,6 +37,7 @@ $comments = $comment->getAll();
         <link rel="stylesheet" href="css/sliders/owl.carousel/owl.transitions.css" type="text/css" media="all">
         <link rel="stylesheet" href="css/sliders/owl.carousel/owl.theme.green.css" type="text/css" media="all">
         <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link href="css/styles.css" rel="stylesheet" type="text/css"/>
         <link rel="shortcut icon" type="image/x-icon" href="images/index.ico">
 
         <style>
@@ -56,7 +57,7 @@ $comments = $comment->getAll();
     </head>
 
     <body class="">
-          
+
         <!-- HEADER -->
         <?php include 'header.php'; ?>
         <!--/ HEADER -->
@@ -208,37 +209,68 @@ $comments = $comment->getAll();
             <!-- OFFERS -->
             <div class="parallax" style="background-image:url(images/banners/183.jpg); background-repeat:repeat;">
                 <div class="dot-layer1">
-                    <section class="hg_section offers">
+                    <section class="hg_section offer offering-color">
 
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-12 col-sm-12">
-                                    <div class="screenshot-box kl-style-2 fixclear">
-                                        <div id="offers-slider" class="owl-carousel owl-theme">
-                                            <?php
-                                            foreach ($offers as $offer) {
-                                                ?>
-                                                <div class="item1">
-                                                    <div class="row">
-                                                        <div class="col-lg-5 offers-details">
-                                                            <h3 class="tbk__title montserrat fs-38 lh-46 fw-bold">
-                                                                <span class="text-custom fw-normal tcolor"><?php echo $offer['title']; ?></span>
-                                                            </h3>
-                                                            <div class="features">
-                                                                <?php echo $offer['description']; ?>
-                                                            </div>
-                                                            <a href="offers.php" class="btn btn-fullcolor btn-third">FIND OUT MORE</a>
-                                                        </div>
-                                                        <div class="col-lg-7 offers-img">
-                                                            <img src="images/offers/<?php echo $offer['image_name']; ?>" alt="Owl Image">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <?php
-                                            }
-                                            ?>
+                                    <div class="col-md-6">
+                                        <div class="offer-l"> 
+                                            <span class="ol-1"></span> 
+                                            <span class="ol-2">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i></span> 
+                                            <span class="ol-4">Discount of US$ 10 per night for all direct bookings through our web site</span> 
+                                            <span class="ol-3"></span> 
+<!--                                            <span class="ol-5">$99/-</span>-->
+                                            <ul>
+                                                <li>
+                                                    <a href="#!" class="waves-effect waves-light btn-large offer-btn">
+                                                        <img src="images/offers/dis1.png" alt="">
+                                                    </a><span>Free WiFi</span>
+                                                </li>
+                                                <li>
+                                                    <a href="#!" class="waves-effect waves-light btn-large offer-btn">
+                                                        <img src="images/offers/dis2.png" alt=""> </a><span>Breakfast</span>
+                                                </li>
+                                                <li>
+                                                    <a href="#!" class="waves-effect waves-light btn-large offer-btn">
+                                                        <img src="images/offers/dis3.png" alt=""> </a><span>Pool</span>
+                                                </li>
+                                                <li>
+                                                    <a href="#!" class="waves-effect waves-light btn-large offer-btn">
+                                                        <img src="images/offers/dis4.png" alt=""> </a><span>Television</span>
+                                                </li>
+                                                <li>
+                                                    <a href="#!" class="waves-effect waves-light btn-large offer-btn">
+                                                        <img src="images/offers/dis5.png" alt=""> </a><span>GYM</span>
+                                                </li>
+                                            </ul>
+                                            <div>
+                                                <a href="booking.php" class="btn btn-fullcolor btn-third find">BOOK NOW</a>
+                                            </div>
                                         </div>
                                     </div>
+
+                                    <div class="col-md-6 hidden-xs hidden-sm">
+                                        <div class="offer-r">
+                                            <div class="or-1">
+                                                <a href="booking.php"><span class="or-11">Book</span></a> 
+                                                <a href="booking.php"><span class="or-12">Now</span></a>
+                                            </div>
+                                            <div class="or-2"> 
+                                                <span class="or-21">Get</span> 
+                                                <span class="or-22">10%</span> 
+                                                <span class="or-23">Off</span> 
+                                                <span class="or-24"></span> 
+                                                <span class="or-25"></span> 
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -278,7 +310,7 @@ $comments = $comment->getAll();
                                     <div class="col-lg-6">
                                         <?php echo $comment['comment']; ?>
                                         <center>
-                                            <img src="images/comment-trip-advisor.png" style="border-radius: 0;">
+                                            <img src="images/comment-trip-advisor.jpg" style="border-radius: 0;">
                                         </center>
                                         <b>  <?php echo $comment['country']; ?>
                                         </b>
