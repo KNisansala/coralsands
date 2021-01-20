@@ -969,6 +969,9 @@ class Helper {
         $email1 = 'coralsands@stmail.lk';
         $email2 = 'accountant.coralsands@stmail.lk';
         $email3 = 'coralsands@sltnet.lk';
+        
+        
+        // $email3 = 'kavini@synotec.lk';
  
         if (
                 mail($email1, $subject, $html, $headers) &&

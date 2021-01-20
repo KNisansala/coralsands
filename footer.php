@@ -38,6 +38,10 @@
                                     <span style="padding-left: 27px" >No.326, Galle Rd, Hikkaduwa, Sri Lanka</span></strong>
                             </li>
                         </ul>
+                        <a href="https://www.facebook.com/CoralSandsHotelHikkaduwa/" target="blank" title="Facebook"><i class="fa fa-facebook"></i></a> | 
+                        <a href="https://www.tripadvisor.com/Hotel_Review-g304134-d477930-Reviews-Coral_Sands_Hotel-Hikkaduwa_Galle_District_Southern_Province.html" target="blank" title="Trip Advisor"><i class="fa fa-tripadvisor" aria-hidden="true"></i></a> | 
+                       <a href="https://twitter.com" target="blank" title="Twitter"><i class="fa fa-twitter"></i></a> | 
+                         <a href="#" title="Google Plus" target="blank"><i class="fa fa-google-plus"></i></a>
                     </div>
                 </div>
             </div>
@@ -45,18 +49,23 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="bottom clearfix">
-                    <ul class="col-sm-3 social-icons sc--clean footer-social clearfix">
-                        <li><a href="https://www.facebook.com/CoralSandsHotelHikkaduwa/" target="blank" title="Facebook"><i class="fa fa-facebook"></i></a></li>
-                        <li><a href="https://www.tripadvisor.com/Hotel_Review-g304134-d477930-Reviews-Coral_Sands_Hotel-Hikkaduwa_Galle_District_Southern_Province.html" target="blank" title="Trip Advisor"><i class="fa fa-tripadvisor" aria-hidden="true"></i></a></li>
-                        <li><a href="https://twitter.com" target="blank" title="Twitter"><i class="fa fa-twitter"></i></a></li>	
-                        <li><a href="#" title="Google Plus" target="blank"><i class="fa fa-google-plus"></i></a></li>
-                    </ul>
-                    <div class="col-sm-7 copyright">
-                        © 2017 All rights reserved. By Coral Sands Hotel. | <a href="terms_and_conditions.php">Terms & Conditions</a>
+                   
+                    <div class="col-sm-5 col-md-5 copyright" style="color:white";>
+                        Copyright Coral Sands Hotel @ <?php echo date("Y"); ?>. || <a href="terms_and_conditions.php">Terms & Conditions</a>
                     </div>
-                    <div class="col-sm-2 row translater"> 
-                        <div class="center-div" id="google_translate_element"></div>
+                    <div class="col-sm-2 col-md-2 translater"> 
+                    <center> 
+                    <div class="center-div" id="google_translate_element"></div>
+                    </center>
+                      
                     </div>
+                     <div class="col-sm-5 col-md-5 pull-right" >
+                         <p style="color:white;text-align: right;">
+                           Website By:  <a href="https://www.synotec.lk/"  target="_blank" style="color:white;"> <i class="fa fa-hand-o-right text-primary heart"  style="color:white;"></i>   Synotec Holdings (Pvt) Ltd.  
+  
+                         </p>
+                      
+                          </div>
                 </div>
             </div>
         </div>

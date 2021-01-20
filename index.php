@@ -1,6 +1,5 @@
 <?php
-include './include.php';
-
+include './include.php'; 
 $Introduction = new Introduction();
 $Introductions = $Introduction->getIntroduction();
 
@@ -13,7 +12,6 @@ $offers = $offer->getAll();
 $comment = new GuestComments();
 $comments = $comment->getAll();
 ?>
-
 <!doctype html>
 <html class="no-js" lang="en-US">
     <head>

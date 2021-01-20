@@ -56,7 +56,12 @@ function setRooms() {
                         var available = parseInt($("#" + key + "-available").text());
 
                         $('#nights').text(value.days);
-                        $('#discount-pe-day').val(value.discount);
+                        if (value.discount == null) {
+                            $('#discount-pe-day').val(0);
+                        } else {
+                            $('#discount-pe-day').val(value.discount);
+                        }
+                        
 //                       
                         $.each(value.prices, function (index, price) {
 //                            
