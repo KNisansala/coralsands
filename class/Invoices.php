@@ -331,7 +331,11 @@ class Invoices {
 
             $email1 = 'coralsands@stmail.lk';
             $email2 = 'accountant.coralsands@stmail.lk';
-            if (mail($email1, $subject, $html, $headers) && mail($email1, $subject, $html, $headers)) {
+            // $email2 = 'kavini@synotec.lk';
+            if (
+                mail($email1, $subject, $html, $headers) && 
+            mail($email2, $subject, $html, $headers)
+            ) {
                 return TRUE;
             } else {
                 return FALSE;
@@ -568,7 +572,10 @@ class Invoices {
 
             $email1 = 'accountant.coralsands@stmail.lk';
             $email2 = 'coralsands@stmail.lk';
-            if (mail($email1, $subject, $html, $headers) && mail($email2, $subject, $html, $headers)) {
+            // $email2 = 'kavini@synotec.lk';
+            if (
+                mail($email1, $subject, $html, $headers) && 
+                mail($email2, $subject, $html, $headers)) {
                 return TRUE;
             } else {
                 return FALSE;

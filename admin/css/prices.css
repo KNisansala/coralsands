@@ -1,45 +1,45 @@
-.types-head {
-    background-color: #d1d1d1;
-    padding: 15px;
-    font-weight: bold;
-    font-size: 17px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-}
-.basises {
-    list-style: none;
-    margin-bottom: 30px;
-}
-.basises li {
-    padding: 10px 20px 10px 10px;
-    margin-left: 20px;
-    border-bottom: 1px solid #ececec;
-    cursor: pointer;
-}
-.add-new {
-    background-color: orangered;
-    padding: 0px 10px;
-    border-radius: 3px;
-    color: #ddd;
-}
-.basises li:hover .add-new {
-    background-color: #000;
-    color: #fff;
-    padding: 1px 11px;
-}
-.price-add-area {
-    padding: 0px 50px;
-}
-.price-add-area a {
-    text-decoration: none;
-}
-
-.add-price-box{
-    margin-left: 20px;
-    margin-right: 20px;
-}
-
-.table-view-seasons{
-    padding-left: 40px;
-    padding-right: 40px;
+.types-head {
+    background-color: #d1d1d1;
+    padding: 15px;
+    font-weight: bold;
+    font-size: 17px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.basises {
+    list-style: none;
+    margin-bottom: 30px;
+}
+.basises li {
+    padding: 10px 20px 10px 10px;
+    margin-left: 20px;
+    border-bottom: 1px solid #ececec;
+    cursor: pointer;
+}
+.add-new {
+    background-color: orangered;
+    padding: 0px 10px;
+    border-radius: 3px;
+    color: #ddd;
+}
+.basises li:hover .add-new {
+    background-color: #000;
+    color: #fff;
+    padding: 1px 11px;
+}
+.price-add-area {
+    padding: 0px 50px;
+}
+.price-add-area a {
+    text-decoration: none;
+}
+
+.add-price-box{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.table-view-seasons{
+    padding-left: 40px;
+    padding-right: 40px;
 }

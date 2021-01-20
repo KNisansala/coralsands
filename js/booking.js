@@ -60,6 +60,8 @@ $(document).ready(function () {
         var supplePrice = $(getType).attr('supplement');
         var max_people = $(getType).attr('max-people');
         var oneRoomPrice = $("#" + typeAndBasis + " option[value='1']").attr('each-price');
+        // 2019-07-24
+        var status_by_date = $("#" + typeAndBasis + " option[value='1']").attr('status');
 
         var adultsHtml = null;
         for (var i = 1; i <= adults; i++) {
@@ -125,7 +127,7 @@ $(document).ready(function () {
                                 </div>\n\
                             </div>\n\
                             <input type="hidden" class="extra-bed-price" value="' + ebPrice + '"/>\n\
-                            <input type="hidden" class="one-room-price" value="' + oneRoomPrice + '"/>\n\
+                            <input type="hidden" class="one-room-price" value="' + oneRoomPrice + '" status="' + status_by_date + '"/>\n\
                             <input type="hidden" class="this-room-type" value="' + typeId + '"/>\n\
                             <input type="hidden" class="this-room-basis" value="' + basisId + '"/>\n\
                         </div>';
@@ -208,6 +210,8 @@ $(document).ready(function () {
                 var total = $("#cart-subtotal").text();
                 var advance = $("#cart-total").text();
                 var code = $('#captchacode').val();
+                // 2019-07-24
+                var nights = $("#nights").text();
 
                 var roomTypes = [];
 
@@ -215,7 +219,12 @@ $(document).ready(function () {
 
                     var roomtype = $(this).children(".this-room-type").val();
                     var roombasis = $(this).children(".this-room-basis").val();
-                    var roomprice = $(this).children(".one-room-price").val();
+                    var status_by_date = $(this).children(".one-room-price").attr("status");
+                    if(status_by_date == "different") {
+                        var roomprice = ($(this).children(".one-room-price").val())/nights;
+                    } else {
+                        var roomprice = $(this).children(".one-room-price").val();
+                    }
                     var extrabedprice = $(this).children(".extra-bed-price").val();
                     var noofextrabed = $(this).children().children(".form-group").children(".extrabeds").val();
                     var nooadults = $(this).children().children(".form-group").children(".adults").val();
@@ -249,6 +258,7 @@ $(document).ready(function () {
                     roomType.push(noofchildrenun5);
                     roomType.push(arrString);
                     roomTypes.push(roomType);
+                    
                 });
 
                 var bookedRooms = [];
