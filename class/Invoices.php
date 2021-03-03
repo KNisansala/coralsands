@@ -451,7 +451,7 @@ class Invoices {
                                 <li><span class="bb">Web Invoice ID : </span>#2500' . $id . '<span></span></li>
                                 <li><span class="bb">Customer : </span><span>' . $inv["customer_name"] . '</span></li>
                                 <li><span class="bb">Payment Reference No : </span>' . $recieptno . '<span></span></li>
-                                <li><span class="bb">Date of Payment : </span>' . $inv["date"] . '<span></span></li>
+                                <li><span class="bb">Date of Invoice : </span>' . $inv["date"] . '<span></span></li>
                                 <li><span class="bb">Amount : </span>US$ ' . $inv["amount"] . '<span></span></li>
                             </ul>
                             ' . $repay . '
@@ -564,7 +564,7 @@ class Invoices {
                                 <li><span class="bb">Web Invoice ID : </span>#2500' . $id . '<span></span></li>
                                 <li><span class="bb">Customer : </span><span>' . $inv["customer_name"] . '</span></li>
                                 <li><span class="bb">Payment Reference No : </span>' . $recieptno . '<span></span></li>
-                                <li><span class="bb">Date of Payment : </span>' . $inv["date"] . '<span></span></li>
+                                <li><span class="bb">Date of Invoice : </span>' . $inv["date"] . '<span></span></li>
                                 <li><span class="bb">Amount : </span>US$ ' . $inv["amount"] . '<span></span></li>
                             </ul>
                             ' . $repay . '
