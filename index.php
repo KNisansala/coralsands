@@ -205,7 +205,7 @@ $comments = $comment->getAll();
             <!-- Responsive subsection -->
             <!--/ SUBSECTION -->
             <!-- OFFERS -->
-            <div class="parallax" style="background-image:url(images/banners/183.jpg); background-repeat:repeat;">
+            <div class="parallax" style="background-image:url(images/banners/183.jpg); background-repeat:repeat; display: none;">
                 <div class="dot-layer1">
                     <section class="hg_section offer offering-color">
 
