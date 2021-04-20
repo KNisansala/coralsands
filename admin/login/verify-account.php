@@ -37,7 +37,11 @@ include '../../include.php';
     <link rel="stylesheet" href="../../js/plugins/sweet-alert-2/sweetalert2.min.css" type="text/css" />
 
     <link rel="shortcut icon" type="image/x-icon" href="../../images/index.ico">
-
+    <style>
+    .col-xs-4.back-btn {
+        padding-right: 0;
+    }
+    </style>
 </head>
 
 <body class="hold-transition login-page">
@@ -72,19 +76,23 @@ include '../../include.php';
 
             <div class="row">
 
-                <div class="col-xs-8">
+                <div class="col-xs-4">
 
                     <div class="checkbox icheck">
 
                     </div>
 
                 </div>
+                <div class="col-xs-4 back-btn">
 
+                    <a href="logout.php" class="btn btn-default btn-block btn-flat login">Back</a>
+                </div>
                 <div class="col-xs-4">
 
                     <button type="button" id="verify" name="verify" class="btn btn-primary btn-block btn-flat login">Verify</button>
                     <input type="hidden" name="user" id="user" value="<?= $_SESSION['user_id']; ?>" />
                 </div>
+
 
             </div>
 
