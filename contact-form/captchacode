@@ -1,0 +1,14 @@
+<?php
+
+//----------------------CAPTCHACODE---------------------
+session_start();
+
+
+var_dump($_POST);
+$response = array();
+if ($_SESSION['CAPTCHACODE'] != $_POST['captchacode']) {
+    $response['status'] = 'incorrect';
+    $response['msg'] = 'Security Code is invalid';
+    echo json_encode($response);
+    exit();
+} 
