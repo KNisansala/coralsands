@@ -30,6 +30,7 @@ if ($passwordFIlteCode === "CSHLTD") {
 
 
     $password = str_replace('CSHLTD+', '', $password);
+    // var_dump($password);
     // dd(password_hash($password, PASSWORD_DEFAULT));
 
 

@@ -15,7 +15,6 @@ $bookingid = $_POST['id'];
 $HELPER = Helper::sendrepayEmail($bookingid);
 
 
-
 $arr = array();
 
 if ($HELPER) {

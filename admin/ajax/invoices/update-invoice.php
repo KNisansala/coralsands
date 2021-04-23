@@ -18,30 +18,30 @@ $arr = array();
 
 if ($invoices->update($_POST)) {
 
-    
+
 
     $id = $_POST['id'];
 
-    
 
-    if($invoices->sendMail($id) === TRUE) {
+
+
+    if ($invoices->sendMail($id) === 'invalid_invoice') {
+
+        // $invoices->sendMailToHotel($id);
+
+        $arr['status'] = 3;
+    } elseif ($invoices->sendMail($id) === TRUE) {
 
         $invoices->sendMailToHotel($id);
 
         $arr['status'] = 2;
-
     } else {
 
         $arr['status'] = 1;
-
     }
-
-    
-
 } else {
 
     $arr['status'] = 0;
-
 }
 
 
@@ -49,4 +49,3 @@ if ($invoices->update($_POST)) {
 header('Content-Type: application/json');
 
 echo json_encode($arr, JSON_PRETTY_PRINT);
-

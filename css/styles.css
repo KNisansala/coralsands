@@ -342,6 +342,7 @@
     -ms-animation-delay: 10s;
     -webkit-animation-delay: 10s;
 }
+
 /*ClockWise Effect Animation*/
 @-moz-keyframes clock{
     0% { opacity: 0; }

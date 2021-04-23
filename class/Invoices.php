@@ -1,8 +1,10 @@
 <?php
 
-class Invoices {
+class Invoices
+{
 
-    public function add($data) {
+    public function add($data)
+    {
 
         $db = new DB();
 
@@ -13,18 +15,19 @@ class Invoices {
         return $result;
     }
 
-    public function update($data) {
+    public function update($data)
+    {
 
         $db = new DB();
 
         $query = "UPDATE `invoice` SET "
-                . "`date` = '" . mysql_real_escape_string($_POST['date']) . "',"
-                . "`customer_name` = '" . mysql_real_escape_string($_POST['name']) . "',"
-                . "`email`= '" . mysql_real_escape_string($_POST['email']) . "',"
-                . "`description` = '" . mysql_real_escape_string($_POST['description']) . "',"
-                . "`amount` = '" . mysql_real_escape_string($_POST['amount']) . "',"
-                . "`due_date` = '" . mysql_real_escape_string($_POST['due']) . "'"
-                . "WHERE `id` = " . $_POST['id'];
+            . "`date` = '" . mysql_real_escape_string($_POST['date']) . "',"
+            . "`customer_name` = '" . mysql_real_escape_string($_POST['name']) . "',"
+            . "`email`= '" . mysql_real_escape_string($_POST['email']) . "',"
+            . "`description` = '" . mysql_real_escape_string($_POST['description']) . "',"
+            . "`amount` = '" . mysql_real_escape_string($_POST['amount']) . "',"
+            . "`due_date` = '" . mysql_real_escape_string($_POST['due']) . "'"
+            . "WHERE `id` = " . $_POST['id'];
 
         if ($db->readQuery($query)) {
             return TRUE;
@@ -33,7 +36,8 @@ class Invoices {
         }
     }
 
-    public function updateStatus($id, $ref) {
+    public function updateStatus($id, $ref)
+    {
 
         $db = new DB();
         $id = (int) $id;
@@ -45,16 +49,17 @@ class Invoices {
         return $result;
     }
 
-    public function refund($data) {
+    public function refund($data)
+    {
 
         $db = new DB();
 
         $query = "UPDATE `invoice` SET "
-                . "`refund_amount` = '" . mysql_real_escape_string($_POST['amount']) . "',"
-                . "`refund_date` = '" . mysql_real_escape_string($_POST['date']) . "',"
-                . "`refund_reason`= '" . mysql_real_escape_string($_POST['reason']) . "',"
-                . "`status` = 2 "
-                . "WHERE `id` = " . $_POST['id'];
+            . "`refund_amount` = '" . mysql_real_escape_string($_POST['amount']) . "',"
+            . "`refund_date` = '" . mysql_real_escape_string($_POST['date']) . "',"
+            . "`refund_reason`= '" . mysql_real_escape_string($_POST['reason']) . "',"
+            . "`status` = 2 "
+            . "WHERE `id` = " . $_POST['id'];
 
         if ($db->readQuery($query)) {
             return TRUE;
@@ -63,7 +68,8 @@ class Invoices {
         }
     }
 
-    public function getAll() {
+    public function getAll()
+    {
 
         $db = new DB();
 
@@ -80,7 +86,8 @@ class Invoices {
         return $array_res;
     }
 
-    public function getById($id) {
+    public function getById($id)
+    {
 
         $db = new DB();
 
@@ -93,7 +100,8 @@ class Invoices {
         return $row;
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
 
         $db = new DB();
 
@@ -108,28 +116,29 @@ class Invoices {
         return $row;
     }
 
-    public function sendMail($id) {
+    public function sendMail($id)
+    {
+        if (is_numeric($id)) {
+            $invoices = new Invoices();
 
-        $invoices = new Invoices();
+            $inv = $invoices->getById($id);
 
-        $inv = $invoices->getById($id);
+            if ($inv) {
 
-        if ($inv) {
+                $site = str_replace("www.", "", $_SERVER['HTTP_HOST']);
+                $subject = 'CoralSands Hotel | Web Invoice | #2500' . $inv["id"];
 
-            $site = str_replace("www.", "", $_SERVER['HTTP_HOST']);
-            $subject = 'CoralSands Hotel | Web Invoice | #2500' . $inv["id"];
+                $from = 'info@coralsandshotel.com';
+                $email = $inv['email'];
+                $amount = $inv['amount'];
+                $repaly = 'accountant.coralsands@stmail.lk';
 
-            $from = 'info@coralsandshotel.com';
-            $email = $inv['email'];
-            $amount = $inv['amount'];
-            $repaly = 'accountant.coralsands@stmail.lk';
+                $headers = "From: " . $from . "\r\n";
+                $headers .= "Reply-To: " . $repaly . "\r\n";
+                $headers .= "MIME-Version: 1.0\r\n";
+                $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 
-            $headers = "From: " . $from . "\r\n";
-            $headers .= "Reply-To: " . $repaly . "\r\n";
-            $headers .= "MIME-Version: 1.0\r\n";
-            $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-
-            $html = '<!DOCTYPE html>
+                $html = '<!DOCTYPE html>
                     <html>
                         <head>
                             <title>' . $subject . '</title>
@@ -214,37 +223,42 @@ class Invoices {
                         </body>
                     </html>';
 
-            if (mail($email, $subject, $html, $headers)) {
-                return TRUE;
+                if (mail($email, $subject, $html, $headers)) {
+                    return TRUE;
+                } else {
+                    return FALSE;
+                }
             } else {
                 return FALSE;
             }
         } else {
-            return FALSE;
+
+            return 'invalid_invoice';
         }
     }
 
-    public function sendMailToHotel($id) {
+    public function sendMailToHotel($id)
+    {
+        if (is_numeric($id)) {
+            $invoices = new Invoices();
 
-        $invoices = new Invoices();
+            $inv = $invoices->getById($id);
 
-        $inv = $invoices->getById($id);
+            if ($inv) {
 
-        if ($inv) {
+                $site = str_replace("www.", "", $_SERVER['HTTP_HOST']);
+                $subject = 'Web Invoice Copy | #2500' . $inv["id"];
 
-            $site = str_replace("www.", "", $_SERVER['HTTP_HOST']);
-            $subject = 'Web Invoice Copy | #2500' . $inv["id"];
+                $from = 'info@coralsandshotel.com';
+                $repaly = $inv['email'];
+                $amount = $inv['amount'];
 
-            $from = 'info@coralsandshotel.com';
-            $repaly = $inv['email'];
-            $amount = $inv['amount'];
+                $headers = "From: " . $from . "\r\n";
+                $headers .= "Reply-To: " . $repaly . "\r\n";
+                $headers .= "MIME-Version: 1.0\r\n";
+                $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 
-            $headers = "From: " . $from . "\r\n";
-            $headers .= "Reply-To: " . $repaly . "\r\n";
-            $headers .= "MIME-Version: 1.0\r\n";
-            $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-
-            $html = '<!DOCTYPE html>
+                $html = '<!DOCTYPE html>
                     <html>
                         <head>
                             <title>' . $subject . '</title>
@@ -329,65 +343,70 @@ class Invoices {
                         </body>
                     </html>';
 
-            $email1 = 'coralsands@stmail.lk';
-            $email2 = 'accountant.coralsands@stmail.lk';
-            $email3 = 'coralsands@sltnet.lk';
-            // $email2 = 'kavini@synotec.lk';
-            if (
-                mail($email1, $subject, $html, $headers) && 
-            mail($email2, $subject, $html, $headers) && 
-            mail($email3, $subject, $html, $headers)
-            ) {
-                return TRUE;
+                $email1 = 'coralsands@stmail.lk';
+                $email2 = 'accountant.coralsands@stmail.lk';
+                $email3 = 'coralsands@sltnet.lk';
+                // $email2 = 'kavini@synotec.lk';
+                if (
+                    mail($email1, $subject, $html, $headers) &&
+                    mail($email2, $subject, $html, $headers) &&
+                    mail($email3, $subject, $html, $headers)
+                ) {
+                    return TRUE;
+                } else {
+                    return FALSE;
+                }
             } else {
                 return FALSE;
             }
         } else {
-            return FALSE;
+
+            return 'invalid_invoice';
         }
     }
 
-    public function sendConfirmationMail($status, $id, $recieptno) {
+    public function sendConfirmationMail($status, $id, $recieptno)
+    {
+        if (is_numeric($id)) {
+            $invoices = new Invoices();
 
-        $invoices = new Invoices();
+            $inv = $invoices->getById($id);
 
-        $inv = $invoices->getById($id);
+            if ($inv) {
 
-        if ($inv) {
+                $site = str_replace("www.", "", $_SERVER['HTTP_HOST']);
+                $subject = 'Payment Status | Web Invoice | #2500' . $id;
 
-            $site = str_replace("www.", "", $_SERVER['HTTP_HOST']);
-            $subject = 'Payment Status | Web Invoice | #2500' . $id;
+                $from = 'info@coralsandshotel.com';
+                $email = $inv['email'];
+                $amount = $inv['amount'];
 
-            $from = 'info@coralsandshotel.com';
-            $email = $inv['email'];
-            $amount = $inv['amount'];
+                $repaly = 'accountant.coralsands@stmail.lk';
 
-            $repaly = 'accountant.coralsands@stmail.lk';
+                $headers = "From: " . $from . "\r\n";
+                $headers .= "Reply-To: " . $repaly . "\r\n";
+                $headers .= "MIME-Version: 1.0\r\n";
+                $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 
-            $headers = "From: " . $from . "\r\n";
-            $headers .= "Reply-To: " . $repaly . "\r\n";
-            $headers .= "MIME-Version: 1.0\r\n";
-            $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-
-            if ($status === 'error') {
-                $repay = '<div>
+                if ($status === 'error') {
+                    $repay = '<div>
                                 <h3>Your transaction was NOT successful. Please  follow the payment process again. </h3>
                             </div>
                             <div style="text-align: center; margin: 35px 0px;">
                                 <a href="http://' . $site . '/invoice-pay.php?id=' . $id . '" style="padding: 15px; font-weight: bold; text-decoration: none; background-color: #ff4200; color: #dfdfdf; border-radius: 3px;">Complete Payment</a>
                             </div>';
-            } else {
-                $repay = '';
-            }
-            if ($status === 'success') {
-                $msg = '<div style="font-size:16px; font-weight:600; margin-left:10%;">
+                } else {
+                    $repay = '';
+                }
+                if ($status === 'success') {
+                    $msg = '<div style="font-size:16px; font-weight:600; margin-left:10%;">
                                 Thank you for making an online payment with Coral Sands Hotel.
                           </div>';
-            } else {
-                $msg = '';
-            }
+                } else {
+                    $msg = '';
+                }
 
-            $html = '<!DOCTYPE html>
+                $html = '<!DOCTYPE html>
                     <html>
                         <head>
                             <title>' . $subject . '</title>
@@ -459,49 +478,54 @@ class Invoices {
                         </body>
                     </html>';
 
-            if (mail($email, $subject, $html, $headers)) {
-                return TRUE;
+                if (mail($email, $subject, $html, $headers)) {
+                    return TRUE;
+                } else {
+                    return FALSE;
+                }
             } else {
                 return FALSE;
             }
         } else {
-            return FALSE;
+
+            return 'invalid_invoice';
         }
     }
 
-    public function sendConfirmationMailToHotel($status, $id, $recieptno) {
+    public function sendConfirmationMailToHotel($status, $id, $recieptno)
+    {
+        if (is_numeric($id)) {
+            $invoices = new Invoices();
 
-        $invoices = new Invoices();
+            $inv = $invoices->getById($id);
 
-        $inv = $invoices->getById($id);
+            if ($inv) {
 
-        if ($inv) {
+                $site = str_replace("www.", "", $_SERVER['HTTP_HOST']);
+                $subject = 'Payment Status';
 
-            $site = str_replace("www.", "", $_SERVER['HTTP_HOST']);
-            $subject = 'Payment Status';
-
-            $from = 'info@coralsandshotel.com';
-            $repaly = $inv['email'];
-            $amount = $inv['amount'];
+                $from = 'info@coralsandshotel.com';
+                $repaly = $inv['email'];
+                $amount = $inv['amount'];
 
 
-            $headers = "From: " . $from . "\r\n";
-            $headers .= "Reply-To: " . $repaly . "\r\n";
-            $headers .= "MIME-Version: 1.0\r\n";
-            $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+                $headers = "From: " . $from . "\r\n";
+                $headers .= "Reply-To: " . $repaly . "\r\n";
+                $headers .= "MIME-Version: 1.0\r\n";
+                $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 
-            if ($status === 'error') {
-                $repay = '<div>
+                if ($status === 'error') {
+                    $repay = '<div>
                                 <h3>Your transaction was NOT successful. Please  follow the payment process again. </h3>
                             </div>
                             <div style="text-align: center; margin: 35px 0px;">
                                 <a href="http://' . $site . '/invoice-pay.php?id=' . $id . '" style="padding: 15px; font-weight: bold; text-decoration: none; background-color: #ff4200; color: #dfdfdf; border-radius: 3px;">Complete Payment</a>
                             </div>';
-            } else {
-                $repay = '';
-            }
+                } else {
+                    $repay = '';
+                }
 
-            $html = '<!DOCTYPE html>
+                $html = '<!DOCTYPE html>
                     <html>
                         <head>
                             <title>' . $subject . '</title>
@@ -572,24 +596,30 @@ class Invoices {
                         </body>
                     </html>';
 
-            $email1 = 'accountant.coralsands@stmail.lk';
-            $email2 = 'coralsands@stmail.lk';
-            $email3 = 'coralsands@sltnet.lk';
-            // $email2 = 'kavini@synotec.lk';
-            if (
-                mail($email1, $subject, $html, $headers) && 
-                mail($email2, $subject, $html, $headers) && 
-                mail($email3, $subject, $html, $headers)) {
-                return TRUE;
+                $email1 = 'accountant.coralsands@stmail.lk';
+                $email2 = 'coralsands@stmail.lk';
+                $email3 = 'coralsands@sltnet.lk';
+                // $email2 = 'kavini@synotec.lk';
+                if (
+                    mail($email1, $subject, $html, $headers) &&
+                    mail($email2, $subject, $html, $headers) &&
+                    mail($email3, $subject, $html, $headers)
+                ) {
+                    return TRUE;
+                } else {
+                    return FALSE;
+                }
             } else {
                 return FALSE;
             }
         } else {
-            return FALSE;
+
+            return 'invalid_invoice';
         }
     }
 
-    public function invoicesCountByDate($date) {
+    public function invoicesCountByDate($date)
+    {
 
         $query = "SELECT count(1) FROM `invoice` WHERE (`payment_date` = '" . $date . "') AND (`status` = 1) ";
         $db = new DB();
@@ -601,5 +631,4 @@ class Invoices {
 
         return $total;
     }
-
 }

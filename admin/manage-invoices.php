@@ -16,263 +16,253 @@ $level = $user['level'];
 
 <html lang="en">
 
-    <head>
+<head>
 
-        <meta charset="utf-8">
+    <meta charset="utf-8">
 
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-        <title>Coral Sand Hotel - Admin Panel</title>                       
+    <title>Coral Sand Hotel - Admin Panel</title>
 
-        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 
-        <link rel="stylesheet" href="cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
 
-        <link rel="stylesheet" href="cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 
-        <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
 
-        <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
 
-        <link rel="stylesheet" href="../js/plugins/jquery-ui/jquery-ui.min.css">
+    <link rel="stylesheet" href="../js/plugins/jquery-ui/jquery-ui.min.css">
 
-        <link rel="stylesheet" href="../js/plugins/sweet-alert-2/sweetalert2.min.css" type="text/css"/>
+    <link rel="stylesheet" href="../js/plugins/sweet-alert-2/sweetalert2.min.css" type="text/css" />
 
-        <link rel="stylesheet" href="js/data-tables/jquery.dataTables.min.css" type="text/css"/>
+    <link rel="stylesheet" href="js/data-tables/jquery.dataTables.min.css" type="text/css" />
 
-        <link href="css/custome.css" rel="stylesheet" type="text/css"/>
+    <link href="css/custome.css" rel="stylesheet" type="text/css" />
 
 
 
-        <style type="text/css">
+    <style type="text/css">
+        .refund-box {
 
-            .refund-box {
+            margin: 0px auto;
 
-                margin: 0px auto;
+        }
 
-            }
+        .refund-box td {
 
-            .refund-box td {
+            vertical-align: top;
 
-                vertical-align: top;
+            text-align: left;
 
-                text-align: left;
+            font-weight: bold;
 
-                font-weight: bold;
+            padding-left: 15px;
 
-                padding-left: 15px;
+            padding-bottom: 10px;
 
-                padding-bottom: 10px;
+        }
+    </style>
 
-            }
 
-        </style>
 
+    <script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
 
+    <script src="tinymce/js/tinymce/tinymce.min.js"></script>
 
-        <script src="plugins/jQuery/jquery-2.2.3.min.js"></script> 
+    <script>
+        tinymce.init({
 
-        <script src="tinymce/js/tinymce/tinymce.min.js"></script> 
+            selector: ".longText",
 
-        <script>
+            // ===========================================
 
+            // INCLUDE THE PLUGIN
 
+            // ===========================================
 
-            tinymce.init({
 
-                selector: ".longText",
 
-                // ===========================================
+            plugins: [
 
-                // INCLUDE THE PLUGIN
+                "advlist autolink lists link image charmap print preview anchor",
 
-                // ===========================================
+                "searchreplace visualblocks code fullscreen",
 
+                "insertdatetime media table contextmenu paste"
 
+            ],
 
-                plugins: [
+            // ===========================================
 
-                    "advlist autolink lists link image charmap print preview anchor",
+            // PUT PLUGIN'S BUTTON on the toolbar
 
-                    "searchreplace visualblocks code fullscreen",
+            // ===========================================
 
-                    "insertdatetime media table contextmenu paste"
 
-                ],
 
-                // ===========================================
+            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image jbimages",
 
-                // PUT PLUGIN'S BUTTON on the toolbar
+            // ===========================================
 
-                // ===========================================
+            // SET RELATIVE_URLS to FALSE (This is required for images to display properly)
 
+            // ===========================================
 
 
-                toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image jbimages",
 
-                // ===========================================
+            relative_urls: false
 
-                // SET RELATIVE_URLS to FALSE (This is required for images to display properly)
 
-                // ===========================================
 
+        });
+    </script>
 
+</head>
 
-                relative_urls: false
+<body class="hold-transition skin-blue sidebar-mini">
 
+    <div class="wrapper">
 
 
-            });
 
+        <?php include './header.php'; ?>
 
+        <?php include './sidebar-menu.php'; ?>
 
-        </script>
 
-    </head>
 
-    <body class="hold-transition skin-blue sidebar-mini">
+        <div class="content-wrapper">
 
-        <div class="wrapper">
+            <section class="content-header" id="scrol-top">
 
+                <h1>
 
+                    Manage Web Invoices
 
-            <?php include './header.php'; ?>
+                </h1>
 
-            <?php include './sidebar-menu.php'; ?>
+                <ol class="breadcrumb">
 
+                    <li><a href="content-manager.php"><i class="fa fa-dashboard"></i> Home</a></li>
 
+                    <li class="active">Manage Web Invoices</li>
 
-            <div class="content-wrapper">
+                </ol>
 
-                <section class="content-header" id="scrol-top">
+            </section>
 
-                    <h1>
+            <?php
 
-                        Manage Web Invoices
+            if ($level == 1) {
 
-                    </h1>
+            ?>
 
-                    <ol class="breadcrumb">
+                <form class="form-horizontal" id="update-form" style="display: none;" method="POST" enctype="multipart/form-data">
 
-                        <li><a href="content-manager.php"><i class="fa fa-dashboard"></i> Home</a></li>
+                    <div class="col-md-12 content">
 
-                        <li class="active">Manage Web Invoices</li>
+                        <div class="nav-tabs-custom">
 
-                    </ol>
+                            <div class="tab-content">
 
-                </section>
+                                <div class="tab-pane active" id="eng">
 
-                <?php
-
-                if ($level == 1) {
-
-                    ?>
-
-                    <form class="form-horizontal" id="update-form" style="display: none;" method="POST" enctype="multipart/form-data">
-
-                        <div class="col-md-12 content">
-
-                            <div class="nav-tabs-custom"> 
-
-                                <div class="tab-content">
-
-                                    <div class="tab-pane active" id="eng">
-
-                                        <div class="box-body">
-
-                                            <div class="form-group">
-
-                                                <label for="date" class="col-sm-2 control-label">Invoice Date</label>
-
-                                                <div class="col-sm-8">
-
-                                                    <input type="text" class="form-control" id="date" name="date" required="true" value="">
-
-                                                </div>
-
-                                            </div>
-
-                                            <div class="form-group">
-
-                                                <label for="name" class="col-sm-2 control-label">Customer Name</label>
-
-                                                <div class="col-sm-8">
-
-                                                    <input type="text" class="form-control" id="name" name="name" required="true" value="">
-
-                                                </div>
-
-                                            </div>
-
-                                            <div class="form-group">
-
-                                                <label for="email" class="col-sm-2 control-label">Customer Email</label>
-
-                                                <div class="col-sm-8">
-
-                                                    <input type="text" class="form-control" id="email" name="email" required="true" value="">
-
-                                                </div>
-
-                                            </div>
-
-                                            <div class="form-group">
-
-                                                <label for="description" class="col-sm-2 control-label">Description</label>
-
-                                                <div class="col-sm-8">
-
-                                                    <input type="text" class="form-control longText" id="description" name="description" required="true" value="">
-
-                                                </div>
-
-                                            </div>
-
-                                            <div class="form-group">
-
-                                                <label for="amount" class="col-sm-2 control-label">Amount ($)</label>
-
-                                                <div class="col-sm-8">
-
-                                                    <input type="number" class="form-control" id="amount" name="amount" required="true" value="">
-
-                                                </div>
-
-                                            </div>
-
-                                            <div class="form-group">
-
-                                                <label for="due" class="col-sm-2 control-label">Due Date</label>
-
-                                                <div class="col-sm-8">
-
-                                                    <input type="text" class="form-control" id="due" name="due" required="true" value="">
-
-                                                </div>
-
-                                            </div>
-
-
-
-                                        </div>
-
-                                    </div>
-
-
-
-                                    <div class="box-footer">
+                                    <div class="box-body">
 
                                         <div class="form-group">
 
-                                            <div class="col-md-2"></div>
+                                            <label for="date" class="col-sm-2 control-label">Invoice Date</label>
 
-                                            <div class="col-md-8">
+                                            <div class="col-sm-8">
 
-                                                <span class="btn btn-info pull-right" id="update" inv-id="">Update</span><span class="btn btn-danger pull-right" style="margin-right: 5px;" id="close-form"><i class="fa fa-close"></i></span>
+                                                <input type="text" class="form-control" id="date" name="date" required="true" value="">
 
                                             </div>
+
+                                        </div>
+
+                                        <div class="form-group">
+
+                                            <label for="name" class="col-sm-2 control-label">Customer Name</label>
+
+                                            <div class="col-sm-8">
+
+                                                <input type="text" class="form-control" id="name" name="name" required="true" value="">
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group">
+
+                                            <label for="email" class="col-sm-2 control-label">Customer Email</label>
+
+                                            <div class="col-sm-8">
+
+                                                <input type="text" class="form-control" id="email" name="email" required="true" value="">
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group">
+
+                                            <label for="description" class="col-sm-2 control-label">Description</label>
+
+                                            <div class="col-sm-8">
+
+                                                <input type="text" class="form-control longText" id="description" name="description" required="true" value="">
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group">
+
+                                            <label for="amount" class="col-sm-2 control-label">Amount ($)</label>
+
+                                            <div class="col-sm-8">
+
+                                                <input type="number" class="form-control" id="amount" name="amount" required="true" value="">
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="form-group">
+
+                                            <label for="due" class="col-sm-2 control-label">Due Date</label>
+
+                                            <div class="col-sm-8">
+
+                                                <input type="text" class="form-control" id="due" name="due" required="true" value="">
+
+                                            </div>
+
+                                        </div>
+
+
+
+                                    </div>
+
+                                </div>
+
+
+
+                                <div class="box-footer">
+
+                                    <div class="form-group">
+
+                                        <div class="col-md-2"></div>
+
+                                        <div class="col-md-8">
+
+                                            <span class="btn btn-info pull-right" id="update" inv-id="">Update</span><span class="btn btn-danger pull-right" style="margin-right: 5px;" id="close-form"><i class="fa fa-close"></i></span>
 
                                         </div>
 
@@ -284,266 +274,256 @@ $level = $user['level'];
 
                         </div>
 
-                    </form> 
+                    </div>
+
+                </form>
 
 
 
-                    <section class="content">
+                <section class="content">
 
-                        <div class="row">
+                    <div class="row">
 
-                            <div class="col-md-12">
+                        <div class="col-md-12">
 
-                                <div class="box box-info">
+                            <div class="box box-info">
 
-                                    <div class="box-header with-border">
+                                <div class="box-header with-border">
 
-                                        <h3 class="box-title"></h3>
+                                    <h3 class="box-title"></h3>
 
-                                    </div>
+                                </div>
 
-                                    <div class="panel-content">
+                                <div class="panel-content">
 
-                                        <div class="panel panel-default"> 
+                                    <div class="panel panel-default">
 
-                                            <div class="panel-body"> 
+                                        <div class="panel-body">
 
-                                                <?php
+                                            <?php
 
-                                                if ($details) {
+                                            if ($details) {
 
-                                                    ?>
+                                            ?>
 
-                                                    <div class="row">
+                                                <div class="row">
 
-                                                        <table class="table table-bordered table-hover" width="100%" id="invoices-list">
+                                                    <table class="table table-bordered table-hover" width="100%" id="invoices-list">
 
-                                                            <thead>
+                                                        <thead>
 
-                                                                <tr>
+                                                            <tr>
 
-                                                                    <th>ID</th>
+                                                                <th>ID</th>
 
-                                                                    <th>Date</th>
+                                                                <th>Date</th>
 
-                                                                    <th>Customer</th>
+                                                                <th>Customer</th>
 
-                                                                    <th>Amount</th>
+                                                                <th>Amount</th>
 
-                                                                    <th>Status</th>
+                                                                <th>Status</th>
 
-                                                                    <th>Option</th>
+                                                                <th>Option</th>
 
-                                                                </tr>
+                                                            </tr>
 
-                                                            </thead>
+                                                        </thead>
 
-                                                            <tbody>
+                                                        <tbody>
 
-                                                                <?php foreach ($details as $detail) {
+                                                            <?php foreach ($details as $detail) {
 
-                                                                    ?>
+                                                            ?>
 
 
 
-                                                                    <tr id="inv-row-<?php echo $detail['id']; ?>">
+                                                                <tr id="inv-row-<?php echo $detail['id']; ?>">
 
-                                                                        <td><?php echo $detail['id']; ?></td>
+                                                                    <td><?php echo $detail['id']; ?></td>
 
-                                                                        <td id="date-<?php echo $detail['id']; ?>">
+                                                                    <td id="date-<?php echo $detail['id']; ?>">
                                                                         <?php echo "Create :- " . $detail['date'] . "<br /> Due :- " . $detail['due_date']; ?>
-                                                                        </td>
+                                                                    </td>
 
-                                                                        <td id="name-<?php echo $detail['id']; ?>"><?php echo "Name :- " . $detail['customer_name']; ?><br />
+                                                                    <td id="name-<?php echo $detail['id']; ?>"><?php echo "Name :- " . $detail['customer_name']; ?><br />
                                                                         <span id="email-<?php echo $detail['id']; ?>"><?php echo "Email :- " . $detail['email']; ?></span> <?php
 
-                                                                            if ($detail['status'] == 0) {
+                                                                                                                                                                            if ($detail['status'] == 0) {
 
-                                                                                ?><span class="btn btn-primary pull-right resend-mail" inv-id="<?php echo $detail['id']; ?>"><i class="fa fa-send" aria-hidden="true"></i></span>
+                                                                                                                                                                            ?><span class="btn btn-primary pull-right resend-mail" inv-id="<?php echo $detail['id']; ?>"><i class="fa fa-send" aria-hidden="true"></i></span>
 
-                                                                                <?php
+                                                                        <?php
 
-                                                                            }
+                                                                                                                                                                            }
 
-                                                                            ?> 
-                                                                            </td>
-
-                                                                       
-
-                                                                        <td style="text-align: right;" id="amount-<?php echo $detail['id']; ?>"><?php echo $detail['amount']; ?></td>
-
-
-                                                                        <td class="status-class" id="status-<?php echo $detail['id']; ?>"><?php
-
-                                                                            if ($detail['status'] == 0) {
-
-                                                                                if ($detail['due_date'] < date('Y-m-d')) {
-
-                                                                                    echo '<span class="text-danger">Expired</span>';
-
-                                                                                } else {
-
-                                                                                    echo '<span class="text-danger">Unpaid</span>';
-
-                                                                                }
-                                                                            }  elseif ($detail['status'] == 1) {
-
-                                                                                echo '<span class="text-success">Paid</span>';
-
-                                                                            } else {
-
-                                                                                echo '<span class="text-warning">Refund</span>';
-
-                                                                            }
-
-                                                                            ?>
-                                                                            </td>
-                                                                        <td class="status-class" id="status-<?php echo $detail['id']; ?>"><?php
-
-                                                                            if ($detail['status'] == 0) {
-
-                                                                                echo ' <span class="btn btn-danger pull-right delete-inv" inv-id="' . $detail["id"] . '"><i class="fa fa-trash" aria-hidden="true"></i></span><span class="btn btn-info pull-right update-inv" inv-id="' . $detail["id"] . '" style="margin-right: 2px;"><i class="fa fa-pencil" aria-hidden="true"></i></span>';
-
-                                                                            } elseif ($detail['status'] == 1) {
-
-                                                                                echo '<span class="btn btn-warning pull-right refund-inv" inv-id="' . $detail["id"] . '"><i class="fa fa-mail-forward" aria-hidden="true"></i></span><span class="btn btn-info pull-right paid-view" inv-id="' . $detail["id"] . '" style="margin-right: 2px;"><i class="fa fa-info-circle" aria-hidden="true"></i></span>';
-
-                                                                            } else {
-
-                                                                                echo '<span class="btn btn-danger pull-right delete-inv" inv-id="' . $detail["id"] . '"><i class="fa fa-trash" aria-hidden="true"></i></span><span class="btn btn-info pull-right refund-view" inv-id="' . $detail["id"] . '" style="margin-right: 2px;"><i class="fa fa-info-circle" aria-hidden="true"></i></span>';
-
-                                                                            }
-
-                                                                            ?>
-                                                                            </td>
-
-                                                                    </tr>
+                                                                        ?>
+                                                                    </td>
 
 
 
-                                                                    <?php
+                                                                    <td style="text-align: right;" id="amount-<?php echo $detail['id']; ?>"><?php echo $detail['amount']; ?></td>
 
-                                                                }
 
-                                                                ?>
+                                                                    <td class="status-class" id="status-<?php echo $detail['id']; ?>"><?php
 
-                                                            </tbody> 
+                                                                                                                                        if ($detail['status'] == 0) {
 
-                                                            <tfoot>
+                                                                                                                                            if ($detail['due_date'] < date('Y-m-d')) {
 
-                                                                <tr>
+                                                                                                                                                echo '<span class="text-danger">Expired</span>';
+                                                                                                                                            } else {
 
-                                                                    <th>ID</th>
+                                                                                                                                                echo '<span class="text-danger">Unpaid</span>';
+                                                                                                                                            }
+                                                                                                                                        } elseif ($detail['status'] == 1) {
 
-                                                                    <th>Date</th>
+                                                                                                                                            echo '<span class="text-success">Paid</span>';
+                                                                                                                                        } else {
 
-                                                                    <th>Customer</th>
+                                                                                                                                            echo '<span class="text-warning">Refund</span>';
+                                                                                                                                        }
 
-                                                                    <th>Email</th>
+                                                                                                                                        ?>
+                                                                    </td>
+                                                                    <td class="status-class" id="status-<?php echo $detail['id']; ?>"><?php
 
-                                                                    <th>Amount</th>
+                                                                                                                                        if ($detail['status'] == 0) {
 
-                                                                    <th>Due</th>
+                                                                                                                                            echo ' <span class="btn btn-danger pull-right delete-inv" inv-id="' . $detail["id"] . '"><i class="fa fa-trash" aria-hidden="true"></i></span><span class="btn btn-info pull-right update-inv" inv-id="' . $detail["id"] . '" style="margin-right: 2px;"><i class="fa fa-pencil" aria-hidden="true"></i></span>';
+                                                                                                                                        } elseif ($detail['status'] == 1) {
 
-                                                                    <th>Status</th>
+                                                                                                                                            echo '<span class="btn btn-warning pull-right refund-inv" inv-id="' . $detail["id"] . '"><i class="fa fa-mail-forward" aria-hidden="true"></i></span><span class="btn btn-info pull-right paid-view" inv-id="' . $detail["id"] . '" style="margin-right: 2px;"><i class="fa fa-info-circle" aria-hidden="true"></i></span>';
+                                                                                                                                        } else {
+
+                                                                                                                                            echo '<span class="btn btn-danger pull-right delete-inv" inv-id="' . $detail["id"] . '"><i class="fa fa-trash" aria-hidden="true"></i></span><span class="btn btn-info pull-right refund-view" inv-id="' . $detail["id"] . '" style="margin-right: 2px;"><i class="fa fa-info-circle" aria-hidden="true"></i></span>';
+                                                                                                                                        }
+
+                                                                                                                                        ?>
+                                                                    </td>
 
                                                                 </tr>
 
-                                                            </tfoot>
 
-                                                        </table>
 
-                                                    </div>
+                                                            <?php
 
-                                                    <?php
+                                                            }
 
-                                                } else {
+                                                            ?>
 
-                                                    echo 'No Results in the Database';
+                                                        </tbody>
 
-                                                }
+                                                        <tfoot>
 
-                                                ?>
+                                                            <tr>
 
-                                            </div>
+                                                                <th>ID</th>
+
+                                                                <th>Date</th>
+
+                                                                <th>Customer</th>
+
+                                                                <th>Amount</th>
+
+                                                                <th>Status</th>
+
+                                                                <th>Option</th>
+
+                                                            </tr>
+
+                                                        </tfoot>
+
+                                                    </table>
+
+                                                </div>
+
+                                            <?php
+
+                                            } else {
+
+                                                echo 'No Results in the Database';
+                                            }
+
+                                            ?>
 
                                         </div>
 
                                     </div>
 
-                                </div>   
+                                </div>
 
                             </div>
 
                         </div>
 
-                    </section>
+                    </div>
 
-                    <?php
+                </section>
 
-                } else {
+            <?php
 
-                    ?>
+            } else {
+
+            ?>
 
 
 
-                    <div class="box box-info">
+                <div class="box box-info">
 
-                        <div class="panel panel-warning" style="margin: 30px;">
+                    <div class="panel panel-warning" style="margin: 30px;">
 
-                            <div class="panel-heading">Access denied !</div>
+                        <div class="panel-heading">Access denied !</div>
 
-                            <div class="panel-body"> You are not authorized to access this page</div>
-
-                        </div>
+                        <div class="panel-body"> You are not authorized to access this page</div>
 
                     </div>
 
+                </div>
 
 
-                    <?php
 
-                }
+            <?php
 
-                ?>
+            }
 
-            </div>
+            ?>
 
         </div>
 
+    </div>
 
 
-        <div id="myModal" class="modal fade">
 
-            <div class="modal-dialog">
+    <div id="myModal" class="modal fade">
 
-                <div class="modal-content" style="padding: 20px 35px;">
+        <div class="modal-dialog">
 
-                    <div class="modal-header">
+            <div class="modal-content" style="padding: 20px 35px;">
 
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <div class="modal-header">
 
-                        <h4 class="modal-title"><b>Invoice Refund Confirmation</b></h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 
-                    </div>
+                    <h4 class="modal-title"><b>Invoice Refund Confirmation</b></h4>
 
-                    <div class="modal-body">
+                </div>
 
-                        <p>Amount ($):</p> <input class="form-control" type="text" id="ref-amount" name="ref-amount" value=""/>
+                <div class="modal-body">
 
-                        <p>Reason:</p> <input class="form-control" type="text" id="ref-reason" name="ref-reason" value=""/>
+                    <p>Amount ($):</p> <input class="form-control" type="text" id="ref-amount" name="ref-amount" value="" />
 
-                        <p>Date:</p> <input class="form-control" type="text" id="ref-date" name="ref-date" value="<?php echo date("Y-m-d"); ?>"/>
+                    <p>Reason:</p> <input class="form-control" type="text" id="ref-reason" name="ref-reason" value="" />
 
-                    </div>
+                    <p>Date:</p> <input class="form-control" type="text" id="ref-date" name="ref-date" value="<?php echo date("Y-m-d"); ?>" />
 
-                    <div class="modal-footer">
+                </div>
 
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <div class="modal-footer">
 
-                        <button type="button" id="do-refund" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
-                    </div>
+                    <button type="button" id="do-refund" class="btn btn-primary">Save changes</button>
 
                 </div>
 
@@ -551,105 +531,106 @@ $level = $user['level'];
 
         </div>
 
-
-
-        <?php include './footer.php'; ?>
-
-
-
-        <script src="bootstrap/js/bootstrap.min.js"></script>
-
-        <script src="plugins/fastclick/fastclick.js"></script>
-
-        <script src="dist/js/app.min.js"></script>
-
-        <script src="dist/js/demo.js"></script>
-
-        <script src="../js/plugins/jquery-ui/jquery-ui.min.js"></script>
-
-        <!-- Sweet alert 2 -->
-
-        <script type="text/javascript" src="../js/plugins/sweet-alert-2/sweetalert2.min.js"></script>
-
-        <!-- Data table -->
-
-        <script type="text/javascript" src="js/data-tables/jquery.dataTables.min.js"></script>
+    </div>
 
 
 
-        <script src="js/invoice.js" type="text/javascript"></script>
-
-        <script>
-
-            $(document).ready(function () {
-
-                $('#invoices-list').DataTable({
-
-                    "lengthMenu": [[100, 150, 200, -1], [100, 150, 200, "All"]],
-
-                    "order": [[0, "desc"]]
-
-                });
-
-            });
-
-        </script>
-
-        <script type="text/javascript">
-
-            $(function () {
+    <?php include './footer.php'; ?>
 
 
 
-                /* global setting */
+    <script src="bootstrap/js/bootstrap.min.js"></script>
 
-                var datepickersOpt = {
+    <script src="plugins/fastclick/fastclick.js"></script>
 
-                    dateFormat: 'yy-mm-dd',
+    <script src="dist/js/app.min.js"></script>
 
-                    minDate: 0
+    <script src="dist/js/demo.js"></script>
 
-                };
+    <script src="../js/plugins/jquery-ui/jquery-ui.min.js"></script>
 
+    <!-- Sweet alert 2 -->
 
+    <script type="text/javascript" src="../js/plugins/sweet-alert-2/sweetalert2.min.js"></script>
 
-                $("#date").datepicker($.extend({
+    <!-- Data table -->
 
-                    onSelect: function () {
-
-                        var minDate = $(this).datepicker('getDate');
-
-                        minDate.setDate(minDate.getDate() + 1); //add two days
-
-                        $("#due").datepicker("option", "minDate", minDate);
-
-                    },
-
-                    dateFormat: 'yy-mm-dd'
-
-                }, datepickersOpt));
+    <script type="text/javascript" src="js/data-tables/jquery.dataTables.min.js"></script>
 
 
 
-                $("#due").datepicker({
+    <script src="js/invoice.js" type="text/javascript"></script>
 
-                    dateFormat: "yy-mm-dd", minDate: 0
+    <script>
+        $(document).ready(function() {
 
-                });
+            $('#invoices-list').DataTable({
 
-                $("#ref-date").datepicker({
+                "lengthMenu": [
+                    [100, 150, 200, -1],
+                    [100, 150, 200, "All"]
+                ],
 
-                    dateFormat: "yy-mm-dd"
-
-                });
+                "order": [
+                    [0, "desc"]
+                ]
 
             });
 
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(function() {
 
 
-        </script>
 
-    </body>
+            /* global setting */
+
+            var datepickersOpt = {
+
+                dateFormat: 'yy-mm-dd',
+
+                minDate: 0
+
+            };
+
+
+
+            $("#date").datepicker($.extend({
+
+                onSelect: function() {
+
+                    var minDate = $(this).datepicker('getDate');
+
+                    minDate.setDate(minDate.getDate() + 1); //add two days
+
+                    $("#due").datepicker("option", "minDate", minDate);
+
+                },
+
+                dateFormat: 'yy-mm-dd'
+
+            }, datepickersOpt));
+
+
+
+            $("#due").datepicker({
+
+                dateFormat: "yy-mm-dd",
+                minDate: 0
+
+            });
+
+            $("#ref-date").datepicker({
+
+                dateFormat: "yy-mm-dd"
+
+            });
+
+        });
+    </script>
+
+</body>
 
 </html>
-
