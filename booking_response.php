@@ -41,7 +41,6 @@ $txnResponseCode = array_key_exists("vpc_TxnResponseCode", $_GET) ? $_GET["vpc_T
 $riskOverallResult = array_key_exists("vpc_RiskOverallResult", $_GET) ? $_GET["vpc_RiskOverallResult"] : "";
 
 
-
 $BOOKING = new Booking($orderInfo);
 
 $rooms = BookingRoomDetails::getRoomTypeDetailsByID($orderInfo);
@@ -209,285 +208,327 @@ $rooms = BookingRoomDetails::getRoomTypeDetailsByID($orderInfo);
                             <div class="col-md-8 col-md-offset-2 response">
 
                                 <?php
-
-                                if ($acqResponseCode === '00' || $acqResponseCode === '08' || $acqResponseCode === '10' || $acqResponseCode === '11' || $acqResponseCode === '16') {
-
-                                ?>
-
-                                    <div class="alert alert-success">
-
-                                        <strong>Success!</strong> Your payment has been successfully processed. Thank you!.
-
-                                    </div>
-
-                                <?php
-
-                                } else {
+                                if (is_numeric($orderInfo)) {
+                                    if ($acqResponseCode === '00' || $acqResponseCode === '08' || $acqResponseCode === '10' || $acqResponseCode === '11' || $acqResponseCode === '16') {
 
                                 ?>
 
-                                    <div class="alert alert-danger">
+                                        <div class="alert alert-success">
 
-                                        <strong>Error!</strong> Your transaction was <strong>NOT</strong> successful. Please follow the payment proceed again and confirm the booking.
-
-                                    </div>
-
-                                <?php
-
-                                }
-
-                                ?>
-
-                                <div class="final-listing">
-
-                                    <div class="row">
-
-                                        <table>
-
-                                            <tr>
-
-                                                <td>Booking Reference No:</td>
-
-                                                <td>#1001<?php echo $orderInfo; ?></td>
-
-                                            </tr>
-
-                                            <tr>
-
-                                                <td>Payment Reference No:</td>
-
-                                                <td><?php echo $receiptNo; ?></td>
-
-                                            </tr>
-
-                                            <tr>
-
-                                                <td>Name:</td>
-
-                                                <td><?php echo $BOOKING->name; ?></td>
-
-                                            </tr>
-
-                                            <tr class="hidden-xs">
-
-                                                <td>Date of Booking:</td>
-
-                                                <td><?php echo $BOOKING->date; ?></td>
-
-                                            </tr>
-
-                                            <tr class="visible-xs">
-
-                                                <td>Date:</td>
-
-                                                <td><?php echo $BOOKING->date; ?></td>
-
-                                            </tr>
-
-                                            <tr>
-
-                                                <td>Country:</td>
-
-                                                <td><?php echo $BOOKING->country; ?></td>
-
-                                            </tr>
-
-                                            <tr>
-
-                                                <td>Total Amount:</td>
-
-                                                <td><?php echo 'US$ ' . $BOOKING->total; ?></td>
-
-                                            </tr>
-
-                                            <tr>
-
-                                                <td>Advance Amount:</td>
-
-                                                <td><?php echo 'US$ ' . $BOOKING->advance; ?></td>
-
-                                            </tr>
-
-                                        </table>
-
-
-
-
-
-                                    </div>
-
-
-
-                                    <div class="row">
-
-                                        <div class="col-xs-6">
-
-                                            <div class="final-dates">
-
-                                                <span>Check In:</span> <span><?php echo $BOOKING->checkin; ?></span>
-
-                                            </div>
+                                            <strong>Success!</strong> Your payment has been successfully processed. Thank you!.
 
                                         </div>
 
-                                        <div class="col-xs-6">
+                                    <?php
 
-                                            <div class="final-dates">
+                                    } else {
 
-                                                <span>Check Out:</span> <span><?php echo $BOOKING->checkout; ?></span>
+                                    ?>
 
-                                            </div>
+                                        <div class="alert alert-danger">
+
+                                            <strong>Error!</strong> Your transaction was <strong>NOT</strong> successful. Please follow the payment proceed again and confirm the booking.
 
                                         </div>
 
-                                    </div>
+                                    <?php
 
-                                    <div class="row">
+                                    }
 
-                                        <div class="col-xs-12">
+                                    ?>
 
-                                            <table id="final-table" class="table table-striped table-responsive">
+                                    <div class="final-listing">
+
+                                        <div class="row">
+
+                                            <table>
 
                                                 <tr>
 
-                                                    <th>Type</th>
+                                                    <td>Booking Reference No:</td>
 
-                                                    <th>Basis</th>
-
-                                                    <th>Occupants</th>
-
-                                                    <th>Additional Children <br /> (5 - 11+ Years)</th>
-
-                                                    <th>Under 5 Years<br /> (No Charge)</th>
+                                                    <td>#1001<?php echo $orderInfo; ?></td>
 
                                                 </tr>
 
+                                                <tr>
 
+                                                    <td>Payment Reference No:</td>
 
-                                                <?php
+                                                    <td><?php echo $receiptNo; ?></td>
 
-                                                foreach ($rooms as $room) {
+                                                </tr>
 
-                                                ?>
+                                                <tr>
 
-                                                    <tr>
+                                                    <td>Name:</td>
 
-                                                        <th>
+                                                    <td><?php echo $BOOKING->name; ?></td>
 
-                                                            <?php
+                                                </tr>
 
-                                                            $roomtype = RoomType::getAllRoomTypeById($room['room_type']);
+                                                <tr class="hidden-xs">
 
-                                                            echo $roomtype['room_type'];
+                                                    <td>Date of Booking:</td>
 
-                                                            ?>
+                                                    <td><?php echo $BOOKING->date; ?></td>
 
-                                                        </th>
+                                                </tr>
 
-                                                        <th>
+                                                <tr class="visible-xs">
 
-                                                            <?php
+                                                    <td>Date:</td>
 
-                                                            $roombasis = RoomBasis::getRoomBasisById($room['room_basis']);
+                                                    <td><?php echo $BOOKING->date; ?></td>
 
-                                                            echo $roombasis['name'];
+                                                </tr>
 
-                                                            ?>
+                                                <tr>
 
-                                                        </th>
+                                                    <td>Country:</td>
 
-                                                        <th><?php echo $room['no_of_adults']; ?></th>
+                                                    <td><?php echo $BOOKING->country; ?></td>
 
-                                                        <th><?php echo $room['no_of_children']; ?></th>
+                                                </tr>
 
-                                                        <th><?php echo $room['no_of_children_un_5']; ?></th>
+                                                <tr>
 
-                                                    </tr>
+                                                    <td>Total Amount:</td>
 
-                                                <?php
+                                                    <td><?php echo 'US$ ' . $BOOKING->total; ?></td>
 
-                                                }
+                                                </tr>
 
-                                                ?>
+                                                <tr>
+
+                                                    <td>Advance Amount:</td>
+
+                                                    <td><?php echo 'US$ ' . $BOOKING->advance; ?></td>
+
+                                                </tr>
 
                                             </table>
 
+
+
+
+
                                         </div>
 
-                                    </div>
 
 
-
-                                    <?php
-
-                                    if ($acqResponseCode === '00' || $acqResponseCode === '08' || $acqResponseCode === '10' || $acqResponseCode === '11' || $acqResponseCode === '16') {
-
-
-
-                                        $result = Booking::updateResponse($orderInfo, 1);
-
-                                        if ($result) {
-
-                                            Helper::sendConfirmationEmail($orderInfo, $receiptNo);
-
-                                            Helper::sendConfirmationEmailToHotel($orderInfo, $receiptNo);
-                                        }
-                                    } else {
-
-                                        Helper::sendPaymentFailEmail($orderInfo);
-
-                                    ?>
                                         <div class="row">
 
-                                            <div class="col-md-12 col-md-offset-5 btns">
+                                            <div class="col-xs-6">
 
-                                                </br>
+                                                <div class="final-dates">
 
-                                                <input type="text" id="txtcaptchacode" name="txtcaptchacode" placeholder="Enter the security code" class="form-control" style="width: 250px;" />
+                                                    <span>Check In:</span> <span><?php echo $BOOKING->checkin; ?></span>
 
-                                                <?php include("./contact-form/captchacode-widget.php"); ?>
+                                                </div>
 
-                                                <button type="submit" id="btnSubmit1" name="SubButL" class="btn btn-danger">Pay Now</button>
+                                            </div>
+
+                                            <div class="col-xs-6">
+
+                                                <div class="final-dates">
+
+                                                    <span>Check Out:</span> <span><?php echo $BOOKING->checkout; ?></span>
+
+                                                </div>
 
                                             </div>
 
                                         </div>
-                                        <form id="payments" action="payments/PHP_VPC_3Party_Order_DO.php" method="post" accept-charset="UTF-8">
 
-                                            <input type="hidden" name="Title" value="PHP VPC 3 Party Transacion">
+                                        <div class="row">
 
-                                            <input type="hidden" name="virtualPaymentClientURL" size="65" value="https://migs.mastercard.com.au/vpcpay" maxlength="250" />
+                                            <div class="col-xs-12">
 
-                                            <input type="hidden" name="vpc_Version" value="1" size="20" maxlength="8" />
+                                                <table id="final-table" class="table table-striped table-responsive">
 
-                                            <input type="hidden" name="vpc_Command" value="pay" size="20" maxlength="16" />
+                                                    <tr>
 
-                                            <input type="hidden" name="vpc_MerchTxnRef" value="" size="20" maxlength="40" />
+                                                        <th>Type</th>
 
-                                            <input type="hidden" name="vpc_AccessCode" value="C15D1837" size="20" maxlength="8" />
+                                                        <th>Basis</th>
 
-                                            <input type="hidden" name="vpc_Merchant" value="CORLSANDUSD" size="20" maxlength="16" />
+                                                        <th>Occupants</th>
 
-                                            <!--                                                <input type="hidden" name="vpc_AccessCode" value="AF20024B" size="20" maxlength="8"/>
+                                                        <th>Additional Children <br /> (5 - 11+ Years)</th>
+
+                                                        <th>Under 5 Years<br /> (No Charge)</th>
+
+                                                    </tr>
+
+
+
+                                                    <?php
+
+                                                    foreach ($rooms as $room) {
+
+                                                    ?>
+
+                                                        <tr>
+
+                                                            <th>
+
+                                                                <?php
+
+                                                                $roomtype = RoomType::getAllRoomTypeById($room['room_type']);
+
+                                                                echo $roomtype['room_type'];
+
+                                                                ?>
+
+                                                            </th>
+
+                                                            <th>
+
+                                                                <?php
+
+                                                                $roombasis = RoomBasis::getRoomBasisById($room['room_basis']);
+
+                                                                echo $roombasis['name'];
+
+                                                                ?>
+
+                                                            </th>
+
+                                                            <th><?php echo $room['no_of_adults']; ?></th>
+
+                                                            <th><?php echo $room['no_of_children']; ?></th>
+
+                                                            <th><?php echo $room['no_of_children_un_5']; ?></th>
+
+                                                        </tr>
+
+                                                    <?php
+
+                                                    }
+
+                                                    ?>
+
+                                                </table>
+
+                                            </div>
+
+                                        </div>
+
+
+
+                                        <?php
+
+                                        if ($acqResponseCode === '00' || $acqResponseCode === '08' || $acqResponseCode === '10' || $acqResponseCode === '11' || $acqResponseCode === '16') {
+
+
+
+                                            $result = Booking::updateResponse($orderInfo, 1);
+
+                                            if ($result) {
+
+                                                $send_confirmation_email = Helper::sendConfirmationEmail($orderInfo, $receiptNo);
+
+                                                if ($send_confirmation_email == 'invalid_booking') {
+                                        ?>
+                                                    <div class="alert alert-danger m-t-10">
+
+                                                        <strong>Error!</strong> Invalid <strong>Booking ID</strong>.
+
+                                                    </div>
+                                                <?php
+                                                    exit;
+                                                }
+
+                                                $send_confirmation_email_to_email = Helper::sendConfirmationEmailToHotel($orderInfo, $receiptNo);
+
+                                                if ($send_confirmation_email_to_email == 'invalid_booking') {
+                                                ?>
+                                                    <div class="alert alert-danger m-t-10">
+
+                                                        <strong>Error!</strong> Invalid <strong>Booking ID</strong>.
+
+                                                    </div>
+                                                <?php
+                                                    exit;
+                                                }
+                                            }
+                                        } else {
+
+                                            $payment_email_fail_email = Helper::sendPaymentFailEmail($orderInfo);
+                                            if ($payment_email_fail_email == 'invalid_booking') {
+                                                ?>
+                                                <div class="alert alert-danger m-t-10">
+
+                                                    <strong>Error!</strong> Invalid <strong>Booking ID</strong>.
+
+                                                </div>
+                                            <?php
+                                                exit;
+                                            }
+
+                                            ?>
+                                            <div class="row">
+
+                                                <div class="col-md-12 col-md-offset-5 btns">
+
+                                                    </br>
+
+                                                    <input type="text" id="txtcaptchacode" name="txtcaptchacode" placeholder="Enter the security code" class="form-control" style="width: 250px;" />
+
+                                                    <?php include("./contact-form/captchacode-widget.php"); ?>
+
+                                                    <button type="submit" id="btnSubmit1" name="SubButL" class="btn btn-danger">Pay Now</button>
+
+                                                </div>
+
+                                            </div>
+                                            <form id="payments" action="payments/PHP_VPC_3Party_Order_DO.php" method="post" accept-charset="UTF-8">
+
+                                                <input type="hidden" name="Title" value="PHP VPC 3 Party Transacion">
+
+                                                <input type="hidden" name="virtualPaymentClientURL" size="65" value="https://migs.mastercard.com.au/vpcpay" maxlength="250" />
+
+                                                <input type="hidden" name="vpc_Version" value="1" size="20" maxlength="8" />
+
+                                                <input type="hidden" name="vpc_Command" value="pay" size="20" maxlength="16" />
+
+                                                <input type="hidden" name="vpc_MerchTxnRef" value="" size="20" maxlength="40" />
+
+                                                <input type="hidden" name="vpc_AccessCode" value="C15D1837" size="20" maxlength="8" />
+
+                                                <input type="hidden" name="vpc_Merchant" value="CORLSANDUSD" size="20" maxlength="16" />
+
+                                                <!--                                                <input type="hidden" name="vpc_AccessCode" value="AF20024B" size="20" maxlength="8"/>
 
                                                 <input type="hidden" name="vpc_Merchant" value="TESTCORLSANDUSD" size="20" maxlength="16"/>-->
 
-                                            <input type="hidden" name="vpc_OrderInfo" value="<?php echo $orderInfo; ?>" size="20" maxlength="34" />
+                                                <input type="hidden" name="vpc_OrderInfo" value="<?php echo $orderInfo; ?>" size="20" maxlength="34" />
 
-                                            <input type="hidden" name="vpc_Amount" value="<?php echo $amount; ?>" maxlength="10" />
+                                                <input type="hidden" name="vpc_Amount" value="<?php echo $amount; ?>" maxlength="10" />
 
-                                            <input type="hidden" name="vpc_ReturnURL" size="65" value="https://coralsandshotel.com/booking_response.php" maxlength="250" />
+                                                <input type="hidden" name="vpc_ReturnURL" size="65" value="https://coralsandshotel.com/booking_response.php" maxlength="250" />
 
-                                            <input type="hidden" name="vpc_Locale" value="en_US" maxlength="10" />
+                                                <input type="hidden" name="vpc_Locale" value="en_US" maxlength="10" />
 
-                                            <input type="hidden" name="vpc_Currency" value="USD" maxlength="10" />
+                                                <input type="hidden" name="vpc_Currency" value="USD" maxlength="10" />
 
-                                        </form>
-                                    <?php
-                                    }
-                                    ?>
-                                </div>
+                                            </form>
+                                        <?php
+                                        }
+                                        ?>
+                                    </div>
+                                <?php
+                                } else {
+                                ?>
+                                    <div class="alert alert-danger">
 
+                                        <strong>Error!</strong> Invalid <strong>Booking ID</strong>.
+
+                                    </div>
+                                <?php
+                                }
+                                ?>
                             </div>
 
                         </div>

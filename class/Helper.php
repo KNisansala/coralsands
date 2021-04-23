@@ -5,9 +5,11 @@
 //error_reporting(E_ALL);
 //error_reporting(0);
 
-class Helper {
+class Helper
+{
 
-    function draw_calendar($month, $year, $roomtype) {
+    function draw_calendar($month, $year, $roomtype)
+    {
 
         /* draw table */
         $calendar = '<table cellpadding="0" cellspacing="0" class="calendar">';
@@ -27,7 +29,7 @@ class Helper {
         $calendar .= '<tr class="calendar-row">';
 
         /* print "blank" days until the first of the current week */
-        for ($x = 0; $x < $running_day; $x++):
+        for ($x = 0; $x < $running_day; $x++) :
             $calendar .= '<td class="calendar-day-np"> </td>';
             $days_in_this_week++;
         endfor;
@@ -35,7 +37,7 @@ class Helper {
         $bookedroomsobj = new BookedRooms(null);
 
         /* keep going with days.... */
-        for ($list_day = 1; $list_day <= $days_in_month; $list_day++):
+        for ($list_day = 1; $list_day <= $days_in_month; $list_day++) :
 
             $thisDate = $year . '-' . $month . '-' . $list_day;
             $showAvailable = $bookedroomsobj->getMainAvailableForDateById($thisDate, $roomtype);
@@ -62,9 +64,9 @@ class Helper {
             $calendar .= str_repeat('<p> </p>', 2);
 
             $calendar .= '</td>';
-            if ($running_day == 6):
+            if ($running_day == 6) :
                 $calendar .= '</tr>';
-                if (($day_counter + 1) != $days_in_month):
+                if (($day_counter + 1) != $days_in_month) :
                     $calendar .= '<tr class="calendar-row">';
                 endif;
                 $running_day = -1;
@@ -76,8 +78,8 @@ class Helper {
         endfor;
 
         /* finish the rest of the days in the week */
-        if ($days_in_this_week < 8):
-            for ($x = 1; $x <= (8 - $days_in_this_week); $x++):
+        if ($days_in_this_week < 8) :
+            for ($x = 1; $x <= (8 - $days_in_this_week); $x++) :
                 $calendar .= '<td class="calendar-day-np"> </td>';
             endfor;
         endif;
@@ -93,26 +95,28 @@ class Helper {
         return $calendar;
     }
 
-    public static function sendrepayEmail($bookingid) {
+    public static function sendrepayEmail($bookingid)
+    {
+        
+        if (is_numeric($bookingid)) {
+            $BOOKING = new Booking($bookingid);
+            $email = $BOOKING->email;
 
-        $BOOKING = new Booking($bookingid);
-        $email = $BOOKING->email;
+            //----------------------Company Information---------------------
 
-        //----------------------Company Information---------------------
+            $from = 'info@coralsandshotel.com';
+            $reply = 'info@coralsandshotel.com';
 
-        $from = 'info@coralsandshotel.com';
-        $reply = 'info@coralsandshotel.com';
+            $subject = 'Coralsands Hotel - Repay Payment';
+            $site = 'coralsandshotel.com';
 
-        $subject = 'Coralsands Hotel - Repay Payment';
-        $site = 'coralsandshotel.com';
+            // mandatory headers for email message, change if you need something different in your setting.
+            $headers = "From: " . $from . "\r\n";
+            $headers .= "Reply-To: " . $reply . "\r\n";
+            $headers .= "MIME-Version: 1.0\r\n";
+            $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 
-// mandatory headers for email message, change if you need something different in your setting.
-        $headers = "From: " . $from . "\r\n";
-        $headers .= "Reply-To: " . $reply . "\r\n";
-        $headers .= "MIME-Version: 1.0\r\n";
-        $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-
-        $html = '<!DOCTYPE html>
+            $html = '<!DOCTYPE html>
                     <html>
                         <head>
                             <title>' . "Coralsands Hotel - Repay Payment" . '</title>
@@ -187,104 +191,108 @@ class Helper {
                     </html>';
 
 
-// Sending mail
+            // Sending mail
 
-        if (mail($email, $subject, $html, $headers)) {
-            return TRUE;
+            if (mail($email, $subject, $html, $headers)) {
+                return TRUE;
+            } else {
+                return FALSE;
+            }
         } else {
             return FALSE;
         }
     }
 
-    public static function sendConfirmationEmail($bookingid, $receiptNo) {
+    public static function sendConfirmationEmail($bookingid, $receiptNo)
+    {
+        if (is_numeric($bookingid)) {
+            //----------------------Company Information---------------------
 
-        //----------------------Company Information---------------------
+            $from = 'info@coralsandshotel.com';
+            $reply = 'coralsands@stmail.lk';
 
-        $from = 'info@coralsandshotel.com';
-        $reply = 'coralsands@stmail.lk';
+            $subject = "Booking Confirmation | Coral Sands Hotel - Hikkaduwa | #1001" . $bookingid . "";
+            $site = 'coralsandshotel.com';
 
-        $subject = "Booking Confirmation | Coral Sands Hotel - Hikkaduwa | #1001" . $bookingid . "";
-        $site = 'coralsandshotel.com';
+            // mandatory headers for email message, change if you need something different in your setting.
+            $headers = "From: " . $from . "\r\n";
+            $headers .= "Reply-To: " . $reply . "\r\n";
+            $headers .= "MIME-Version: 1.0\r\n";
+            $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 
-        // mandatory headers for email message, change if you need something different in your setting.
-        $headers = "From: " . $from . "\r\n";
-        $headers .= "Reply-To: " . $reply . "\r\n";
-        $headers .= "MIME-Version: 1.0\r\n";
-        $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+            $BOOKING = new Booking($bookingid);
+            $email = $BOOKING->email;
 
-        $BOOKING = new Booking($bookingid);
-        $email = $BOOKING->email;
+            $settings = new Settings();
+            $percentage = $settings->getPercentage();
 
-        $settings = new Settings();
-        $percentage = $settings->getPercentage();
+            /* ---- No of Nights  ---- */
+            $dates = BookedRooms::createDateRange($BOOKING->checkin, $BOOKING->checkout, $format = "Y-m-d");
+            $nights = count($dates);
+            /* ---- No of Nights  ---- */
 
-        /* ---- No of Nights  ---- */
-        $dates = BookedRooms::createDateRange($BOOKING->checkin, $BOOKING->checkout, $format = "Y-m-d");
-        $nights = count($dates);
-        /* ---- No of Nights  ---- */
+            $rooms = BookingRoomDetails::getRoomTypeDetailsByID($bookingid);
+            $totChilSup = 0;
+            foreach ($rooms as $room) {
+                if ($room['no_of_children']) {
+                    $children = (int) $room['no_of_children'];
 
-        $rooms = BookingRoomDetails::getRoomTypeDetailsByID($bookingid);
-        $totChilSup = 0;
-        foreach ($rooms as $room) {
-            if ($room['no_of_children']) {
-                $children = (int) $room['no_of_children'];
+                    $type = RoomType::getAllRoomTypeById($room['room_type']);
+                    $Sup = (float) $type['children_supplement'];
 
-                $type = RoomType::getAllRoomTypeById($room['room_type']);
-                $Sup = (float) $type['children_supplement'];
+                    $ChildSup = $children * $Sup;
 
-                $ChildSup = $children * $Sup;
-
-                $totChilSup = $totChilSup + $ChildSup;
+                    $totChilSup = $totChilSup + $ChildSup;
+                }
             }
-        }
 
-        /* ---- total room price ---- */
-        $totRoomPrice = 0;
-        foreach ($rooms as $room) {
-            $roomprice = (int) $room['room_price'];
+            /* ---- total room price ---- */
+            $totRoomPrice = 0;
+            foreach ($rooms as $room) {
+                $roomprice = (int) $room['room_price'];
 
-            $totRoomPrice = $totRoomPrice + $roomprice;
-        }
-        /* ---- //total room price ---- */
-
-        /* ---- total extra bed price  ---- */
-        $totEBPrice = 0;
-        foreach ($rooms as $room) {
-            if ($room['no_of_extra_beds']) {
-                $ebprice = (int) $room['no_of_extra_beds'] * (float) $room['extra_bed_price'];
-
-                $totEBPrice = $totEBPrice + $ebprice;
+                $totRoomPrice = $totRoomPrice + $roomprice;
             }
-        }
-        /* ---- //total extra bed price ---- */
+            /* ---- //total room price ---- */
 
-        /* ---- total price  ---- */
-        $totPrice = ($totRoomPrice * $nights) + ($totChilSup * $nights) + ($totEBPrice * $nights);
-        /* ---- //total price ---- */
+            /* ---- total extra bed price  ---- */
+            $totEBPrice = 0;
+            foreach ($rooms as $room) {
+                if ($room['no_of_extra_beds']) {
+                    $ebprice = (int) $room['no_of_extra_beds'] * (float) $room['extra_bed_price'];
 
-        /* ---- payable amount  ---- */
-        $paidamount = (float) $BOOKING->advance;
-        $payableamount = $totPrice - $paidamount;
-        /* ---- //payable amount  ---- */
-
-
-
-        $tr = '';
-        foreach ($rooms as $key => $room) {
-            $roomtype = RoomType::getAllRoomTypeById($room["room_type"]);
-            $roombasis = RoomBasis::getRoomBasisById($room['room_basis']);
-            if (!empty($room['no_of_extra_beds'])) {
-                $eb = $room['no_of_extra_beds'];
-            } else {
-                $eb = 0;
+                    $totEBPrice = $totEBPrice + $ebprice;
+                }
             }
-            if ($room['children_ages']) {
-                $ages = $room['children_ages'];
-            } else {
-                $ages = 0;
-            }
-            $key++;
-            $tr1 = '<tr>
+            /* ---- //total extra bed price ---- */
+
+            /* ---- total price  ---- */
+            $totPrice = ($totRoomPrice * $nights) + ($totChilSup * $nights) + ($totEBPrice * $nights);
+            /* ---- //total price ---- */
+
+            /* ---- payable amount  ---- */
+            $paidamount = (float) $BOOKING->advance;
+            $payableamount = $totPrice - $paidamount;
+            /* ---- //payable amount  ---- */
+
+
+
+            $tr = '';
+            foreach ($rooms as $key => $room) {
+                $roomtype = RoomType::getAllRoomTypeById($room["room_type"]);
+                $roombasis = RoomBasis::getRoomBasisById($room['room_basis']);
+                if (!empty($room['no_of_extra_beds'])) {
+                    $eb = $room['no_of_extra_beds'];
+                } else {
+                    $eb = 0;
+                }
+                if ($room['children_ages']) {
+                    $ages = $room['children_ages'];
+                } else {
+                    $ages = 0;
+                }
+                $key++;
+                $tr1 = '<tr>
                         <td class="table-td1"><b>Room ' . $key . '</b> <br/>Occupants: ' . $room['no_of_adults'] . '<br/>Additional Children  (5 - 11+ Years): ' . $room['no_of_children'] . '<br/>Under 5 Years (No Charge): ' . $room['no_of_children_un_5'] . '</td>
                         <td class="table-td1">' . $roomtype["room_type"] . '</td>
                         <td class="table-td1">' . $roombasis['name'] . '</td> 
@@ -292,19 +300,19 @@ class Helper {
                     </tr>';
 
 
-            $tr = $tr . $tr1;
-        }
+                $tr = $tr . $tr1;
+            }
 
-        if ($BOOKING->message) {
-            $specialrequest = ' <tr>
+            if ($BOOKING->message) {
+                $specialrequest = ' <tr>
                                     <td colspan="2"><strong><u>Special request</u></strong></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2">' . $BOOKING->message . '</td>
                                 </tr>';
-        }
+            }
 
-        $html = '<!DOCTYPE html>
+            $html = '<!DOCTYPE html>
                     <html>
                         <head>
                             <title>' . "Coralsands Hotel - Repay Payment" . '</title>
@@ -545,20 +553,20 @@ class Helper {
                                     <td>Total Accommodation Amount</td>
                                     <td>: US $ ' . number_format($totRoomPrice * $nights, 2) . '</td>
                                 </tr>';
-        if (0 != $totChilSup) {
-            $html .= '<tr>
+            if (0 != $totChilSup) {
+                $html .= '<tr>
                                     <td>Total Children Supplement Amount</td>
                                     <td>: US $ ' . number_format($totChilSup * $nights, 2) . '</td>
                                 </tr>';
-        }
+            }
 
-        if (0 != $totEBPrice) {
-            $html .= '<tr>
+            if (0 != $totEBPrice) {
+                $html .= '<tr>
                                     <td>Total Extra Bed Amount</td>
                                     <td>: US $ ' . number_format($totEBPrice * $nights, 2) . '</td>
                                 </tr>';
-        }
-        $html .= '<tr>
+            }
+            $html .= '<tr>
                                     <td></td>
                                     <td></td>
                                 </tr>
@@ -597,122 +605,126 @@ class Helper {
                             </table>
                             </body>
                         </html>';
-       
-        if (mail($email, $subject, $html, $headers)) {
-            return TRUE;
+
+            if (mail($email, $subject, $html, $headers)) {
+                return TRUE;
+            } else {
+                return FALSE;
+            }
         } else {
-            return FALSE;
+            return 'invalid_booking';
         }
     }
 
-    public static function sendConfirmationEmailToHotel($bookingid, $receiptNo) {
-
-        //----------------------Company Information---------------------
-
-
-        $BOOKING = new Booking($bookingid);
-
-        $from = 'info@coralsandshotel.com';
-        $reply = $BOOKING->email;
+    public static function sendConfirmationEmailToHotel($bookingid, $receiptNo)
+    {
+        if (is_numeric($bookingid)) {
+            //----------------------Company Information---------------------
 
 
-        $subject = "Booking Confirmation | Coral Sands Hotel - Hikkaduwa | #1001" . $bookingid . "";
-        $site = 'coralsandshotel.com';
+            $BOOKING = new Booking($bookingid);
 
-        // mandatory headers for email message, change if you need something different in your setting.
-        $headers = "From: " . $from . "\r\n";
-        $headers .= "Reply-To: " . $reply . "\r\n";
-        $headers .= "MIME-Version: 1.0\r\n";
-        $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+            $from = 'info@coralsandshotel.com';
+            $reply = $BOOKING->email;
 
-        $settings = new Settings();
-        $percentage = $settings->getPercentage();
 
-        /* ---- No of Nights  ---- */
-        $dates = BookedRooms::createDateRange($BOOKING->checkin, $BOOKING->checkout, $format = "Y-m-d");
-        $nights = count($dates);
-        /* ---- No of Nights  ---- */
+            $subject = "Booking Confirmation | Coral Sands Hotel - Hikkaduwa | #1001" . $bookingid . "";
+            $site = 'coralsandshotel.com';
 
-        $rooms = BookingRoomDetails::getRoomTypeDetailsByID($bookingid);
-        $totChilSup = 0;
-        foreach ($rooms as $room) {
-            if ($room['no_of_children']) {
-                $children = (int) $room['no_of_children'];
+            // mandatory headers for email message, change if you need something different in your setting.
+            $headers = "From: " . $from . "\r\n";
+            $headers .= "Reply-To: " . $reply . "\r\n";
+            $headers .= "MIME-Version: 1.0\r\n";
+            $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 
-                $type = RoomType::getAllRoomTypeById($room['room_type']);
-                $Sup = (float) $type['children_supplement'];
+            $settings = new Settings();
+            $percentage = $settings->getPercentage();
 
-                $ChildSup = $children * $Sup;
+            /* ---- No of Nights  ---- */
+            $dates = BookedRooms::createDateRange($BOOKING->checkin, $BOOKING->checkout, $format = "Y-m-d");
+            $nights = count($dates);
+            /* ---- No of Nights  ---- */
 
-                $totChilSup = $totChilSup + $ChildSup;
-            }
-        }
+            $rooms = BookingRoomDetails::getRoomTypeDetailsByID($bookingid);
+            $totChilSup = 0;
+            foreach ($rooms as $room) {
+                if ($room['no_of_children']) {
+                    $children = (int) $room['no_of_children'];
 
-        /* ---- total room price ---- */
-        $totRoomPrice = 0;
-        foreach ($rooms as $room) {
-            $roomprice = (int) $room['room_price'];
+                    $type = RoomType::getAllRoomTypeById($room['room_type']);
+                    $Sup = (float) $type['children_supplement'];
 
-            $totRoomPrice = $totRoomPrice + $roomprice;
-        }
-        /* ---- //total room price ---- */
+                    $ChildSup = $children * $Sup;
 
-        /* ---- total extra bed price  ---- */
-        $totEBPrice = 0;
-        foreach ($rooms as $room) {
-            if ($room['no_of_extra_beds']) {
-                $ebprice = (int) $room['no_of_extra_beds'] * (float) $room['extra_bed_price'];
-
-                $totEBPrice = $totEBPrice + $ebprice;
-            }
-        }
-        /* ---- //total extra bed price ---- */
-
-        /* ---- total price  ---- */
-        $totPrice = ($totRoomPrice * $nights) + ($totChilSup * $nights) + ($totEBPrice * $nights);
-        /* ---- //total price ---- */
-
-        /* ---- payable amount  ---- */
-        $paidamount = (float) $BOOKING->advance;
-        $payableamount = $totPrice - $paidamount;
-        /* ---- //payable amount  ---- */
-
-        $tr = '';
-
-        foreach ($rooms as $room) {
-            $roomtype = RoomType::getAllRoomTypeById($room["room_type"]);
-            $roombasis = RoomBasis::getRoomBasisById($room['room_basis']);
-            if (!empty($room['no_of_extra_beds'])) {
-                $eb = $room['no_of_extra_beds'];
-            } else {
-                $eb = 0;
-            }
-            if ($room['children_ages']) {
-                $ages = $room['children_ages'];
-            } else {
-                $ages = 0;
+                    $totChilSup = $totChilSup + $ChildSup;
+                }
             }
 
-            $tr1 = '<tr>
+            /* ---- total room price ---- */
+            $totRoomPrice = 0;
+            foreach ($rooms as $room) {
+                $roomprice = (int) $room['room_price'];
+
+                $totRoomPrice = $totRoomPrice + $roomprice;
+            }
+            /* ---- //total room price ---- */
+
+            /* ---- total extra bed price  ---- */
+            $totEBPrice = 0;
+            foreach ($rooms as $room) {
+                if ($room['no_of_extra_beds']) {
+                    $ebprice = (int) $room['no_of_extra_beds'] * (float) $room['extra_bed_price'];
+
+                    $totEBPrice = $totEBPrice + $ebprice;
+                }
+            }
+            /* ---- //total extra bed price ---- */
+
+            /* ---- total price  ---- */
+            $totPrice = ($totRoomPrice * $nights) + ($totChilSup * $nights) + ($totEBPrice * $nights);
+            /* ---- //total price ---- */
+
+            /* ---- payable amount  ---- */
+            $paidamount = (float) $BOOKING->advance;
+            $payableamount = $totPrice - $paidamount;
+            /* ---- //payable amount  ---- */
+
+            $tr = '';
+
+            foreach ($rooms as $room) {
+                $roomtype = RoomType::getAllRoomTypeById($room["room_type"]);
+                $roombasis = RoomBasis::getRoomBasisById($room['room_basis']);
+                if (!empty($room['no_of_extra_beds'])) {
+                    $eb = $room['no_of_extra_beds'];
+                } else {
+                    $eb = 0;
+                }
+                if ($room['children_ages']) {
+                    $ages = $room['children_ages'];
+                } else {
+                    $ages = 0;
+                }
+
+                $tr1 = '<tr>
                         <td class="table-td1"><b>Room ' . $key . '</b> <br/>Occupants: ' . $room['no_of_adults'] . '<br/>Additional Children  (5 - 11+ Years): ' . $room['no_of_children'] . '<br/>Under 5 Years (No Charge): ' . $room['no_of_children_un_5'] . '</td>
                         <td class="table-td1">' . $roomtype["room_type"] . '</td>
                         <td class="table-td1">' . $roombasis['name'] . '</td> 
                          <td class="table-td1">' . $room['room_price'] . '</td>
                     </tr>';
 
-            $tr = $tr . $tr1;
-        }
+                $tr = $tr . $tr1;
+            }
 
-        if ($BOOKING->message) {
-            $specialrequest = ' <tr>
+            if ($BOOKING->message) {
+                $specialrequest = ' <tr>
                                     <td colspan="2"><strong><u>Special request</u></strong></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2">' . $BOOKING->message . '</td>
                                 </tr>';
-        }
+            }
 
-        $html = '<!DOCTYPE html>
+            $html = '<!DOCTYPE html>
                     <html>
                         <head>
                             <title>' . "Coralsands Hotel - Repay Payment" . '</title>
@@ -912,20 +924,20 @@ class Helper {
                                     <td>Total Accommodation Amount</td>
                                     <td>: US $ ' . number_format($totRoomPrice * $nights, 2) . '</td>
                                 </tr>';
-        if (0 != $totChilSup) {
-            $html .= '<tr>
+            if (0 != $totChilSup) {
+                $html .= '<tr>
                                     <td>Total Children Supplement Amount</td>
                                     <td>: US $ ' . number_format($totChilSup * $nights, 2) . '</td>
                                 </tr>';
-        }
+            }
 
-        if (0 != $totEBPrice) {
-            $html .= '<tr>
+            if (0 != $totEBPrice) {
+                $html .= '<tr>
                                     <td>Total Extra Bed Amount</td>
                                     <td>: US $ ' . number_format($totEBPrice * $nights, 2) . '</td>
                                 </tr>';
-        }
-        $html .= '<tr>
+            }
+            $html .= '<tr>
                                     <td></td>
                                     <td></td>
                                 </tr>
@@ -966,44 +978,50 @@ class Helper {
                         </html>';
 
 
-        $email1 = 'coralsands@stmail.lk';
-        $email2 = 'accountant.coralsands@stmail.lk';
-        $email3 = 'coralsands@sltnet.lk';
-        
-        
-        // $email3 = 'kavini@synotec.lk';
- 
-        if (
+            $email1 = 'coralsands@stmail.lk';
+            $email2 = 'accountant.coralsands@stmail.lk';
+            $email3 = 'coralsands@sltnet.lk';
+
+
+            // $email3 = 'kavini@synotec.lk';
+
+            if (
                 mail($email1, $subject, $html, $headers) &&
                 mail($email2, $subject, $html, $headers) &&
                 mail($email3, $subject, $html, $headers)
-        ) {
-            return TRUE;
+            ) {
+                return TRUE;
+            } else {
+                return FALSE;
+            }
         } else {
-            return FALSE;
+            return 'invalid_booking';
         }
     }
 
-    public static function sendPaymentFailEmail($bookingid) {
+    public static function sendPaymentFailEmail($bookingid)
+    {
+        
+        if (is_numeric($bookingid)) {
+            
+            $BOOKING = new Booking($bookingid);
+            $email = $BOOKING->email;
 
-        $BOOKING = new Booking($bookingid);
-        $email = $BOOKING->email;
+            //----------------------Company Information---------------------
 
-        //----------------------Company Information---------------------
+            $from = 'info@coralsandshotel.com';
+            $reply = 'coralsands@stmail.lk';
 
-        $from = 'info@coralsandshotel.com';
-        $reply = 'coralsands@stmail.lk';
+            $subject = 'Coralsands Hotel - Repay Payment';
+            $site = 'coralsandshotel.com';
 
-        $subject = 'Coralsands Hotel - Repay Payment';
-        $site = 'coralsandshotel.com';
+            // mandatory headers for email message, change if you need something different in your setting.
+            $headers = "From: " . $from . "\r\n";
+            $headers .= "Reply-To: " . $reply . "\r\n";
+            $headers .= "MIME-Version: 1.0\r\n";
+            $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 
-// mandatory headers for email message, change if you need something different in your setting.
-        $headers = "From: " . $from . "\r\n";
-        $headers .= "Reply-To: " . $reply . "\r\n";
-        $headers .= "MIME-Version: 1.0\r\n";
-        $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-
-        $html = '<!DOCTYPE html>
+            $html = '<!DOCTYPE html>
                     <html>
                         <head>
                             <title>' . "Coralsands Hotel - Repay Payment" . '</title>
@@ -1079,13 +1097,16 @@ class Helper {
                     </html>';
 
 
-// Sending mail
+            // Sending mail
 
-        if (mail($email, $subject, $html, $headers)) {
-            return TRUE;
+            if (mail($email, $subject, $html, $headers)) {
+                return TRUE;
+            } else {
+                return FALSE;
+            }
         } else {
-            return FALSE;
+            
+            return 'invalid_booking';
         }
     }
-
 }

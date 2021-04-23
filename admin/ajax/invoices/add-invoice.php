@@ -24,7 +24,12 @@ if ($invoices->add($_POST)) {
 
 
 
-    if ($invoices->sendMail($id) === TRUE) {
+    if ($invoices->sendMail($id) === 'invalid_invoice') {
+
+        // $invoices->sendMailToHotel($id);
+
+        $arr['status'] = 3;
+    } elseif ($invoices->sendMail($id) === TRUE) {
 
         $invoices->sendMailToHotel($id);
 
