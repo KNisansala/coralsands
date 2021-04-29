@@ -22,14 +22,14 @@ if ($invoices->add($_POST)) {
 
     $id = mysql_insert_id();
 
+    $res = $invoices->sendMail($id);
 
-
-    if ($invoices->sendMail($id) === 'invalid_invoice') {
+    if ($res === 'invalid_invoice') {
 
         // $invoices->sendMailToHotel($id);
 
         $arr['status'] = 3;
-    } elseif ($invoices->sendMail($id) === TRUE) {
+    } elseif ($res === TRUE) {
 
         $invoices->sendMailToHotel($id);
 

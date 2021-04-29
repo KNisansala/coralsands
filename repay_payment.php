@@ -363,52 +363,66 @@ $price = $arr[0] . $arr[1];
                                         </div>
 
                                     </div>
+                                    <?php
+                                    if ($BOOKING->status == 0) {
+                                    ?>
 
-                                    <div class="row">
 
-                                        <div class="col-md-12 col-md-offset-5 btns">
+                                        <div class="row">
 
-                                            </br>
+                                            <div class="col-md-12 col-md-offset-5 btns">
 
-                                            <input type="text" id="txtcaptchacode" name="txtcaptchacode" placeholder="Enter the security code" class="form-control" style="width: 250px;" />
+                                                </br>
 
-                                            <?php include("./contact-form/captchacode-widget.php"); ?>
+                                                <input type="text" id="txtcaptchacode" name="txtcaptchacode" placeholder="Enter the security code" class="form-control" style="width: 250px;" />
 
-                                            <button type="submit" id="btnSubmit" name="SubButL" class="btn btn-danger">Pay Now</button>
+                                                <?php include("./contact-form/captchacode-widget.php"); ?>
+
+                                                <button type="submit" id="btnSubmit" name="SubButL" class="btn btn-danger">Pay Now</button>
+
+                                            </div>
 
                                         </div>
 
-                                    </div>
+                                        <form id="payments" action="payments/PHP_VPC_3Party_Order_DO.php" method="post" accept-charset="UTF-8">
 
-                                    <form id="payments" action="payments/PHP_VPC_3Party_Order_DO.php" method="post" accept-charset="UTF-8">
+                                            <input type="hidden" name="Title" value="PHP VPC 3 Party Transacion">
 
-                                        <input type="hidden" name="Title" value="PHP VPC 3 Party Transacion">
+                                            <input type="hidden" name="virtualPaymentClientURL" size="65" value="https://migs.mastercard.com.au/vpcpay" maxlength="250" />
 
-                                        <input type="hidden" name="virtualPaymentClientURL" size="65" value="https://migs.mastercard.com.au/vpcpay" maxlength="250" />
+                                            <input type="hidden" name="vpc_Version" value="1" size="20" maxlength="8" />
 
-                                        <input type="hidden" name="vpc_Version" value="1" size="20" maxlength="8" />
+                                            <input type="hidden" name="vpc_Command" value="pay" size="20" maxlength="16" />
 
-                                        <input type="hidden" name="vpc_Command" value="pay" size="20" maxlength="16" />
+                                            <input type="hidden" name="vpc_MerchTxnRef" value="<?php echo str_replace(':', 'a', str_replace(' ', '', date("Y-m-d H:i:s"))); ?>" size="20" maxlength="40" />
 
-                                        <input type="hidden" name="vpc_MerchTxnRef" value="<?php echo str_replace(':', 'a', str_replace(' ', '', date("Y-m-d H:i:s"))); ?>" size="20" maxlength="40" />
+                                            <input type="hidden" name="vpc_AccessCode" value="C15D1837" size="20" maxlength="8" />
 
-                                        <input type="hidden" name="vpc_AccessCode" value="C15D1837" size="20" maxlength="8" />
+                                            <input type="hidden" name="vpc_Merchant" value="CORLSANDUSD" size="20" maxlength="16" />
 
-                                        <input type="hidden" name="vpc_Merchant" value="CORLSANDUSD" size="20" maxlength="16" />
+                                            <input type="hidden" name="vpc_OrderInfo" value="<?php echo $BOOKING->id; ?>" size="20" maxlength="34" />
 
-                                        <input type="hidden" name="vpc_OrderInfo" value="<?php echo $BOOKING->id; ?>" size="20" maxlength="34" />
+                                            <input type="hidden" name="vpc_Amount" value="<?php echo $price; ?>" maxlength="10" />
 
-                                        <input type="hidden" name="vpc_Amount" value="<?php echo $price; ?>" maxlength="10" />
+                                            <input type="hidden" name="vpc_ReturnURL" size="65" value="https://coralsandshotel.com/booking_response.php" maxlength="250" />
 
-                                        <input type="hidden" name="vpc_ReturnURL" size="65" value="https://coralsandshotel.com/booking_response.php" maxlength="250" />
+                                            <input type="hidden" name="vpc_Locale" value="en_US" maxlength="10" />
 
-                                        <input type="hidden" name="vpc_Locale" value="en_US" maxlength="10" />
+                                            <input type="hidden" name="vpc_Currency" value="USD" maxlength="10" />
 
-                                        <input type="hidden" name="vpc_Currency" value="USD" maxlength="10" />
-                                        
 
-                                    </form>
+                                        </form>
+                                    <?php
+                                    } else {
+                                    ?>
+                                        <div class="alert alert-danger m-t-10">
 
+                                            Already <strong>Paid.</strong>.
+
+                                        </div>
+                                    <?php
+                                    }
+                                    ?>
                                 </div>
 
                             </div>

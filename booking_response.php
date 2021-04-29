@@ -2,7 +2,7 @@
 
 include './include.php';
 
-
+// dd($_SERVER);
 
 $Title = array_key_exists("Title", $_GET) ? $_GET["Title"] : "";
 
@@ -208,6 +208,7 @@ $rooms = BookingRoomDetails::getRoomTypeDetailsByID($orderInfo);
                             <div class="col-md-8 col-md-offset-2 response">
 
                                 <?php
+                                // dd($orderInfo);
                                 if (is_numeric($orderInfo)) {
                                     if ($acqResponseCode === '00' || $acqResponseCode === '08' || $acqResponseCode === '10' || $acqResponseCode === '11' || $acqResponseCode === '16') {
 
@@ -418,7 +419,6 @@ $rooms = BookingRoomDetails::getRoomTypeDetailsByID($orderInfo);
 
 
                                         <?php
-
                                         if ($acqResponseCode === '00' || $acqResponseCode === '08' || $acqResponseCode === '10' || $acqResponseCode === '11' || $acqResponseCode === '16') {
 
 
@@ -454,8 +454,8 @@ $rooms = BookingRoomDetails::getRoomTypeDetailsByID($orderInfo);
                                                 }
                                             }
                                         } else {
-
-                                            $payment_email_fail_email = Helper::sendPaymentFailEmail($orderInfo);
+                                            $payment_email_fail_email = '';
+                                            // $payment_email_fail_email = Helper::sendPaymentFailEmail($orderInfo);
                                             if ($payment_email_fail_email == 'invalid_booking') {
                                                 ?>
                                                 <div class="alert alert-danger m-t-10">
@@ -468,53 +468,65 @@ $rooms = BookingRoomDetails::getRoomTypeDetailsByID($orderInfo);
                                             }
 
                                             ?>
-                                            <div class="row">
+                                            <?php
+                                            if ($BOOKING->status == 0) {
+                                            ?>
+                                                <div class="row">
 
-                                                <div class="col-md-12 col-md-offset-5 btns">
+                                                    <div class="col-md-12 col-md-offset-5 btns">
 
-                                                    </br>
+                                                        </br>
 
-                                                    <input type="text" id="txtcaptchacode" name="txtcaptchacode" placeholder="Enter the security code" class="form-control" style="width: 250px;" />
+                                                        <input type="text" id="txtcaptchacode" name="txtcaptchacode" placeholder="Enter the security code" class="form-control" style="width: 250px;" />
 
-                                                    <?php include("./contact-form/captchacode-widget.php"); ?>
+                                                        <?php include("./contact-form/captchacode-widget.php"); ?>
 
-                                                    <button type="submit" id="btnSubmit1" name="SubButL" class="btn btn-danger">Pay Now</button>
+                                                        <button type="submit" id="btnSubmit1" name="SubButL" class="btn btn-danger">Pay Now</button>
+
+                                                    </div>
 
                                                 </div>
+                                                <form id="payments" action="payments/PHP_VPC_3Party_Order_DO.php" method="post" accept-charset="UTF-8">
 
-                                            </div>
-                                            <form id="payments" action="payments/PHP_VPC_3Party_Order_DO.php" method="post" accept-charset="UTF-8">
+                                                    <input type="hidden" name="Title" value="PHP VPC 3 Party Transacion">
 
-                                                <input type="hidden" name="Title" value="PHP VPC 3 Party Transacion">
+                                                    <input type="hidden" name="virtualPaymentClientURL" size="65" value="https://migs.mastercard.com.au/vpcpay" maxlength="250" />
 
-                                                <input type="hidden" name="virtualPaymentClientURL" size="65" value="https://migs.mastercard.com.au/vpcpay" maxlength="250" />
+                                                    <input type="hidden" name="vpc_Version" value="1" size="20" maxlength="8" />
 
-                                                <input type="hidden" name="vpc_Version" value="1" size="20" maxlength="8" />
+                                                    <input type="hidden" name="vpc_Command" value="pay" size="20" maxlength="16" />
 
-                                                <input type="hidden" name="vpc_Command" value="pay" size="20" maxlength="16" />
+                                                    <input type="hidden" name="vpc_MerchTxnRef" value="" size="20" maxlength="40" />
 
-                                                <input type="hidden" name="vpc_MerchTxnRef" value="" size="20" maxlength="40" />
+                                                    <input type="hidden" name="vpc_AccessCode" value="C15D1837" size="20" maxlength="8" />
 
-                                                <input type="hidden" name="vpc_AccessCode" value="C15D1837" size="20" maxlength="8" />
+                                                    <input type="hidden" name="vpc_Merchant" value="CORLSANDUSD" size="20" maxlength="16" />
 
-                                                <input type="hidden" name="vpc_Merchant" value="CORLSANDUSD" size="20" maxlength="16" />
-
-                                                <!--                                                <input type="hidden" name="vpc_AccessCode" value="AF20024B" size="20" maxlength="8"/>
+                                                    <!--                                                <input type="hidden" name="vpc_AccessCode" value="AF20024B" size="20" maxlength="8"/>
 
                                                 <input type="hidden" name="vpc_Merchant" value="TESTCORLSANDUSD" size="20" maxlength="16"/>-->
 
-                                                <input type="hidden" name="vpc_OrderInfo" value="<?php echo $orderInfo; ?>" size="20" maxlength="34" />
+                                                    <input type="hidden" name="vpc_OrderInfo" value="<?php echo $orderInfo; ?>" size="20" maxlength="34" />
 
-                                                <input type="hidden" name="vpc_Amount" value="<?php echo $amount; ?>" maxlength="10" />
+                                                    <input type="hidden" name="vpc_Amount" value="<?php echo $amount; ?>" maxlength="10" />
 
-                                                <input type="hidden" name="vpc_ReturnURL" size="65" value="https://coralsandshotel.com/booking_response.php" maxlength="250" />
+                                                    <input type="hidden" name="vpc_ReturnURL" size="65" value="https://coralsandshotel.com/booking_response.php" maxlength="250" />
 
-                                                <input type="hidden" name="vpc_Locale" value="en_US" maxlength="10" />
+                                                    <input type="hidden" name="vpc_Locale" value="en_US" maxlength="10" />
 
-                                                <input type="hidden" name="vpc_Currency" value="USD" maxlength="10" />
+                                                    <input type="hidden" name="vpc_Currency" value="USD" maxlength="10" />
 
-                                            </form>
+                                                </form>
+                                            <?php
+                                            } else {
+                                            ?>
+                                                <div class="alert alert-danger m-t-10">
+
+                                                    Already <strong>Paid.</strong>.
+
+                                                </div>
                                         <?php
+                                            }
                                         }
                                         ?>
                                     </div>
