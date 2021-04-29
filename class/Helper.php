@@ -97,26 +97,27 @@ class Helper
 
     public static function sendrepayEmail($bookingid)
     {
-        
+
         if (is_numeric($bookingid)) {
             $BOOKING = new Booking($bookingid);
-            $email = $BOOKING->email;
+            if ($BOOKING->status == 0) {
+                $email = $BOOKING->email;
 
-            //----------------------Company Information---------------------
+                //----------------------Company Information---------------------
 
-            $from = 'info@coralsandshotel.com';
-            $reply = 'info@coralsandshotel.com';
+                $from = 'info@coralsandshotel.com';
+                $reply = 'info@coralsandshotel.com';
 
-            $subject = 'Coralsands Hotel - Repay Payment';
-            $site = 'coralsandshotel.com';
+                $subject = 'Coralsands Hotel - Repay Payment';
+                $site = 'coralsandshotel.com';
 
-            // mandatory headers for email message, change if you need something different in your setting.
-            $headers = "From: " . $from . "\r\n";
-            $headers .= "Reply-To: " . $reply . "\r\n";
-            $headers .= "MIME-Version: 1.0\r\n";
-            $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+                // mandatory headers for email message, change if you need something different in your setting.
+                $headers = "From: " . $from . "\r\n";
+                $headers .= "Reply-To: " . $reply . "\r\n";
+                $headers .= "MIME-Version: 1.0\r\n";
+                $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 
-            $html = '<!DOCTYPE html>
+                $html = '<!DOCTYPE html>
                     <html>
                         <head>
                             <title>' . "Coralsands Hotel - Repay Payment" . '</title>
@@ -191,10 +192,13 @@ class Helper
                     </html>';
 
 
-            // Sending mail
+                // Sending mail
 
-            if (mail($email, $subject, $html, $headers)) {
-                return TRUE;
+                if (mail($email, $subject, $html, $headers)) {
+                    return TRUE;
+                } else {
+                    return FALSE;
+                }
             } else {
                 return FALSE;
             }
@@ -1001,27 +1005,28 @@ class Helper
 
     public static function sendPaymentFailEmail($bookingid)
     {
-        
+
         if (is_numeric($bookingid)) {
-            
+
             $BOOKING = new Booking($bookingid);
-            $email = $BOOKING->email;
+            if ($BOOKING->status == 0) {
+                $email = $BOOKING->email;
 
-            //----------------------Company Information---------------------
+                //----------------------Company Information---------------------
 
-            $from = 'info@coralsandshotel.com';
-            $reply = 'coralsands@stmail.lk';
+                $from = 'info@coralsandshotel.com';
+                $reply = 'coralsands@stmail.lk';
 
-            $subject = 'Coralsands Hotel - Repay Payment';
-            $site = 'coralsandshotel.com';
+                $subject = 'Coralsands Hotel - Repay Payment';
+                $site = 'coralsandshotel.com';
 
-            // mandatory headers for email message, change if you need something different in your setting.
-            $headers = "From: " . $from . "\r\n";
-            $headers .= "Reply-To: " . $reply . "\r\n";
-            $headers .= "MIME-Version: 1.0\r\n";
-            $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+                // mandatory headers for email message, change if you need something different in your setting.
+                $headers = "From: " . $from . "\r\n";
+                $headers .= "Reply-To: " . $reply . "\r\n";
+                $headers .= "MIME-Version: 1.0\r\n";
+                $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 
-            $html = '<!DOCTYPE html>
+                $html = '<!DOCTYPE html>
                     <html>
                         <head>
                             <title>' . "Coralsands Hotel - Repay Payment" . '</title>
@@ -1097,15 +1102,18 @@ class Helper
                     </html>';
 
 
-            // Sending mail
+                // Sending mail
 
-            if (mail($email, $subject, $html, $headers)) {
-                return TRUE;
+                if (mail($email, $subject, $html, $headers)) {
+                    return TRUE;
+                } else {
+                    return FALSE;
+                }
             } else {
                 return FALSE;
             }
         } else {
-            
+
             return 'invalid_booking';
         }
     }
