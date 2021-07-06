@@ -245,6 +245,18 @@ $level = $user['level'];
                                             </div>
 
                                         </div>
+                                        <div class="form-group">
+
+                                            <label for="amount" class="col-sm-2 control-label">No of Attempts</label>
+
+                                            <div class="col-sm-8">
+
+                                                <input type="number" class="form-control" id="no_of_attempts" name="no_of_attempts" required="true" value="">
+
+                                            </div>
+
+                                        </div>
+
 
 
 
@@ -350,11 +362,12 @@ $level = $user['level'];
                                                                         <span id="email-<?php echo $detail['id']; ?>"><?php echo "Email :- " . $detail['email']; ?></span> <?php
 
                                                                                                                                                                             if ($detail['status'] == 0) {
-
+                                                                                                                                                                                if ($detail['due_date'] >= date('Y-m-d')) {
                                                                                                                                                                             ?><span class="btn btn-primary pull-right resend-mail" inv-id="<?php echo $detail['id']; ?>"><i class="fa fa-send" aria-hidden="true"></i></span>
 
                                                                         <?php
 
+                                                                                                                                                                                }
                                                                                                                                                                             }
 
                                                                         ?>

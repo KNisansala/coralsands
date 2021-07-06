@@ -716,7 +716,7 @@ $percentage = $settings->getPercentage();
 
                                                         <!-- Payment Gateway Form Start-->
 
-                                                        <form id="payments" action="payments/PHP_VPC_3Party_Order_DO.php" method="post" accept-charset="UTF-8">
+                                                        <form id="payments" action="payments/PHP_VPC_3Party_Order_DO.php?type=booking" method="post" accept-charset="UTF-8">
 
                                                             <input type="hidden" name="Title" value="PHP VPC 3 Party Transacion">
 
