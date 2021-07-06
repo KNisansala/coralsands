@@ -101,6 +101,7 @@ $(document).ready(function () {
                 $('#amount').val(invoice.amount);
 
                 $('#due').val(invoice.due_date);
+                $('#no_of_attempts').val(invoice.attempts);
 
 
 
@@ -235,6 +236,7 @@ $(document).ready(function () {
         var amount = $('#amount').val();
 
         var due = $('#due').val();
+        var no_of_attempts = $('#no_of_attempts').val();
 
 
 
@@ -314,7 +316,8 @@ $(document).ready(function () {
 
                     amount: amount,
 
-                    due: due
+                    due: due,
+                    attempts: no_of_attempts
 
                 },
 

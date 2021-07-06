@@ -393,7 +393,7 @@ if ($_GET['id']) {
                                                         <?php
 
                                                         if ($inv['status'] == 0) {
-
+                                                            if ($inv['due_date'] >= date('Y-m-d')) {
                                                         ?>
 
                                                             <div class="row">
@@ -419,10 +419,10 @@ if ($_GET['id']) {
                                                         <?php
 
                                                         }
-
+                                                    }
                                                         ?>
 
-                                                        <form id="invoice-pay" action="payments/PHP_VPC_3Party_Order_DO.php" method="post" accept-charset="UTF-8">
+                                                        <form id="invoice-pay" action="payments/PHP_VPC_3Party_Order_DO.php?type=invoice" method="post" accept-charset="UTF-8">
 
                                                             <input type="hidden" name="Title" value="PHP VPC 3 Party Transacion">
 

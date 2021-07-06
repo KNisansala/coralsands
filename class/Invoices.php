@@ -26,7 +26,8 @@ class Invoices
             . "`email`= '" . mysql_real_escape_string($_POST['email']) . "',"
             . "`description` = '" . mysql_real_escape_string($_POST['description']) . "',"
             . "`amount` = '" . mysql_real_escape_string($_POST['amount']) . "',"
-            . "`due_date` = '" . mysql_real_escape_string($_POST['due']) . "'"
+            . "`due_date` = '" . mysql_real_escape_string($_POST['due']) . "',"
+            . "`attempts` = '" . mysql_real_escape_string($_POST['attempts']) . "'"
             . "WHERE `id` = " . $_POST['id'];
 
         if ($db->readQuery($query)) {
@@ -34,6 +35,33 @@ class Invoices
         } else {
             return FALSE;
         }
+    }
+    public function updateAttempts($attempts, $invoice)
+    {
+
+        $db = new DB();
+
+        $query = "UPDATE `invoice` SET "
+            . "`attempts` = '" . mysql_real_escape_string($attempts) . "'"
+            . " WHERE `id` = " . $invoice;
+
+        if ($db->readQuery($query)) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+
+    public static function getAttemptsByInvoice($id)
+    {
+
+        $db = new DB();
+
+        $query = "SELECT * FROM `invoice` WHERE `id` = $id";
+
+        $result = mysql_fetch_array($db->readQuery($query));
+
+        return $result;
     }
 
     public function updateStatus($id, $ref)

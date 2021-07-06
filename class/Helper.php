@@ -1117,4 +1117,54 @@ class Helper
             return 'invalid_booking';
         }
     }
+
+    public static function addFormSubmission($invoice, $type, $data, $actual_link)
+    {
+
+        date_default_timezone_set('Asia/Colombo');
+        $createdAt = date('Y-m-d H:i:s');
+        $db = new DB();
+
+        $query = "INSERT INTO `form_submission` (`created_at`,`invoice`,`type`, `data`, `request_url`) VALUES('" . $createdAt . "', '" . mysql_real_escape_string($invoice) . "', '" . mysql_real_escape_string($type) . "', '" . mysql_real_escape_string($data) . "', '" . mysql_real_escape_string($actual_link) . "')";
+
+        $result = $db->readQuery($query);
+
+        return $result;
+    }
+    public static function getAttempts($id, $type)
+    {
+
+        $db = new DB();
+
+        $query = "SELECT * FROM `form_submission` WHERE `invoice` = $id AND `type` LIKE '" . $type . "' ORDER BY id ASC";
+
+        $result = $db->readQuery($query);
+
+        $array_res = array();
+
+        while ($row = mysql_fetch_array($result)) {
+
+            array_push($array_res, $row);
+        }
+
+        return $array_res;
+    }
+    public static function getAll()
+    {
+
+        $db = new DB();
+
+        $query = "SELECT * FROM `form_submission` ORDER BY id DESC LIMIT 200";
+
+        $result = $db->readQuery($query);
+
+        $array_res = array();
+
+        while ($row = mysql_fetch_array($result)) {
+
+            array_push($array_res, $row);
+        }
+
+        return $array_res;
+    }
 }
