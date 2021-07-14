@@ -267,6 +267,15 @@
                 </a>
 
             </li>
+            <li class="treeview">
+
+                <a href="manage-payment-responses.php">
+
+                    <i class="fa fa-sitemap"></i> <span>Invoice/Booking Payment <br/>Responses</span>
+
+                </a>
+
+            </li>
 
         </ul>
 

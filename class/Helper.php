@@ -1167,4 +1167,35 @@ class Helper
 
         return $array_res;
     }
+    public static function addResponse($invoice, $type, $data, $actual_link)
+    {
+
+        date_default_timezone_set('Asia/Colombo');
+        $createdAt = date('Y-m-d H:i:s');
+        $db = new DB();
+
+        $query = "INSERT INTO `payment_response` (`created_at`,`invoice`,`type`, `data`, `request_url`) VALUES('" . $createdAt . "', '" . mysql_real_escape_string($invoice) . "', '" . mysql_real_escape_string($type) . "', '" . mysql_real_escape_string($data) . "', '" . mysql_real_escape_string($actual_link) . "')";
+// dd($query);
+        $result = $db->readQuery($query);
+
+        return $result;
+    }
+    public static function getAllResponses()
+    {
+
+        $db = new DB();
+
+        $query = "SELECT * FROM `payment_response` ORDER BY id DESC LIMIT 200";
+
+        $result = $db->readQuery($query);
+
+        $array_res = array();
+
+        while ($row = mysql_fetch_array($result)) {
+
+            array_push($array_res, $row);
+        }
+
+        return $array_res;
+    }
 }
