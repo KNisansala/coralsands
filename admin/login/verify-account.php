@@ -60,7 +60,7 @@ include '../../include.php';
 
             <div class="form-group has-feedback">
 
-                <input type="text" class="form-control" name="reset_code" id="reset-code" placeholder="Reset Code" required="TRUE">
+                <input type="text" class="form-control" name="reset_code" id="reset-code" placeholder="Verification Code" required="TRUE">
 
                 <span class="glyphicon glyphicon-user form-control-feedback"></span>
 

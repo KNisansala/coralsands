@@ -5,24 +5,25 @@
 	include_once(dirname(__FILE__) . '/../class/DB.php');
 	session_start();
 	$actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-	// dd($actual_link);
+	// $actual_link = "https://coralsandshotel.com/payments/PHP_VPC_3Party_Order_DO.php?type=invoice";
+
+	// if ($_SERVER['SERVER_NAME'] == 'localhost') {
 	if ($_SERVER['SERVER_NAME'] == 'coralsandshotel.com') {
 		if ($actual_link == 'https://coralsandshotel.com/payments/PHP_VPC_3Party_Order_DO.php?type=invoice' || $actual_link == 'https://coralsandshotel.com/payments/PHP_VPC_3Party_Order_DO.php?type=booking') {
 			if ($_SESSION['NEW_CAPTCHA'] == $_SESSION['CAPTCHACODE']) {
 				$type = $_GET['type'];
-
 				if ($type == 'invoice') {
 					$invoice = INVOICES::getAttemptsByInvoice($_POST['vpc_OrderInfo']);
-				} else {
+				} elseif ($type == 'booking') {
 					$invoice = Booking::getAttemptsByBooking($_POST['vpc_OrderInfo']);
 				}
 
-				if ($invoice['attempts'] < 3) {
+				if ($invoice['attempts'] != '' && $invoice['attempts'] != NULL && $invoice['attempts'] < 3 && $invoice['status'] == 0 && $invoice['id'] == $_POST['vpc_OrderInfo']) {
 					$res = HELPER::addFormSubmission($_POST['vpc_OrderInfo'], $type, json_encode($_POST), $actual_link);
 					$attempt_count = $invoice['attempts'] + 1;
 					if ($type == 'invoice') {
 						$res1 = INVOICES::updateAttempts($attempt_count, $_POST['vpc_OrderInfo']);
-					} else {
+					} elseif ($type == 'booking') {
 						$res1 = Booking::updateAttempts($attempt_count, $_POST['vpc_OrderInfo']);
 					}
 

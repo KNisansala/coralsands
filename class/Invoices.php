@@ -57,7 +57,7 @@ class Invoices
 
         $db = new DB();
 
-        $query = "SELECT * FROM `invoice` WHERE `id` = $id";
+        $query = "SELECT * FROM `invoice` WHERE `id` = $id AND `status` = 0";
 
         $result = mysql_fetch_array($db->readQuery($query));
 

@@ -44,7 +44,9 @@ $riskOverallResult = array_key_exists("vpc_RiskOverallResult", $_GET) ? $_GET["v
 $BOOKING = new Booking($orderInfo);
 
 $rooms = BookingRoomDetails::getRoomTypeDetailsByID($orderInfo);
-
+$type = 'booking';
+$actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+$res = HELPER::addResponse($_GET['vpc_OrderInfo'], $type, json_encode($_GET), $actual_link);
 ?>
 
 <!doctype html>

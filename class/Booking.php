@@ -381,7 +381,7 @@ class Booking
 
         $db = new DB();
 
-        $query = "SELECT * FROM `booking` WHERE `id` = $id";
+        $query = "SELECT * FROM `booking` WHERE `id` = $id AND `status` = 0";
 
         $result = mysql_fetch_array($db->readQuery($query));
 
