@@ -473,7 +473,8 @@ $res = HELPER::addResponse($_GET['vpc_OrderInfo'], $type, json_encode($_GET), $a
                                             <?php
                                             if ($BOOKING->status == 0) {
                                             ?>
-                                                <div class="row">
+                                                <!-- Direct Booking Stopped 2021/07/19-->
+                                                <!-- <div class="row">
 
                                                     <div class="col-md-12 col-md-offset-5 btns">
 
@@ -487,8 +488,8 @@ $res = HELPER::addResponse($_GET['vpc_OrderInfo'], $type, json_encode($_GET), $a
 
                                                     </div>
 
-                                                </div>
-                                                <form id="payments" action="payments/PHP_VPC_3Party_Order_DO.php" method="post" accept-charset="UTF-8">
+                                                </div> -->
+                                                <form id="payments" action="payments/PHP_VPC_3Party_Order_DO.php?type=booking" method="post" accept-charset="UTF-8">
 
                                                     <input type="hidden" name="Title" value="PHP VPC 3 Party Transacion">
 

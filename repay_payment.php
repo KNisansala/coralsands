@@ -367,8 +367,8 @@ $price = $arr[0] . $arr[1];
                                     if ($BOOKING->status == 0) {
                                     ?>
 
-
-                                        <div class="row">
+                                        <!-- Direct Booking Stopped 2021/07/19-->
+                                        <!-- <div class="row">
 
                                             <div class="col-md-12 col-md-offset-5 btns">
 
@@ -382,7 +382,7 @@ $price = $arr[0] . $arr[1];
 
                                             </div>
 
-                                        </div>
+                                        </div> -->
 
                                         <form id="payments" action="payments/PHP_VPC_3Party_Order_DO.php?type=booking" method="post" accept-charset="UTF-8">
 

@@ -759,8 +759,8 @@ $percentage = $settings->getPercentage();
                                                                         <img src="images/payments/paymentimg1.jpg" alt="" />
 
                                                                     </div>
-
-                                                                    <button type="submit" id="btnSubmit" name="SubButL" class="btn btn-danger booking-btn pull-right bookingSubmit">PLACE BOOKING</button>
+                                                                    <!-- Direct Booking Stopped 2021/07/19-->
+                                                                    <!-- <button type="submit" id="btnSubmit" name="SubButL" class="btn btn-danger booking-btn pull-right bookingSubmit">PLACE BOOKING</button> -->
 
 
 
